@@ -1,7 +1,7 @@
 package com.example.bookingnl.domain;
 
 import lombok.*;
-
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
