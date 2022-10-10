@@ -1,12 +1,15 @@
 package com.example.bookingnl.persistence;
 
-import com.example.bookingnl.domain.CreateUserRequest;
-import com.example.bookingnl.domain.CreateUserResponse;
 import com.example.bookingnl.domain.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+import java.util.List;
 
-public interface UserRepository {
-    User getUser(String email, String password);
-    CreateUserResponse createCustomer(CreateUserRequest request);
+@Repository
+public interface UserRepository extends JpaRepository<User, Long> {
+    User findByEmailAndPassword(String email, String password);
+    User save(User user);
+    void deleteByEmail(String email);
+    List<User> findAll ();
 }
