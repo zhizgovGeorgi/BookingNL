@@ -1,11 +1,10 @@
 package com.example.bookingnl.domain;
 
 import lombok.*;
+import net.bytebuddy.implementation.bind.annotation.Default;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor
@@ -22,5 +21,6 @@ public class User {
     private String lastName;
     private String password;
     private String adress;
+    @Column(columnDefinition = "varchar(255) default 'Customer'")
     private String role;
 }

@@ -4,39 +4,47 @@ import com.example.bookingnl.bussines.UserService;
 import com.example.bookingnl.domain.GetUserRequest;
 import com.example.bookingnl.domain.User;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.net.URI;
 import java.util.List;
 
-@RestController
-@RequestMapping("/customers")
-@AllArgsConstructor
+import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
+@RestController
+@RequestMapping("/api")
+@AllArgsConstructor
+@CrossOrigin
 public class CustomersController {
     private UserService service;
 
-    @GetMapping()
-    public User getUser(@RequestBody GetUserRequest request) {
-       return service.findByEmailAndPassword(request.getEmail(), request.getPassword());
+    @PostMapping("/register")
+    public ResponseEntity<User> saveUser(@RequestBody User user) {
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/register").toUriString());
+        return ResponseEntity.created(uri).body(service.save(user));
     }
 
-    @CrossOrigin
-    @PostMapping()
-    public String createStudent(@RequestBody User user) {
-        service.save(user);
-        return "Well done!";
-    }
+    @GetMapping("/token/refresh")
+    public void refreshToken(HttpServletRequest request, HttpServletResponse response) {
+        String authorizationHeader = request.getHeader(AUTHORIZATION);
 
+    }
 
     @DeleteMapping()
-    public String deleteUser(@PathVariable(required = false) String email){
+    public String deleteUser(@PathVariable(required = false) String email) {
         service.deleteByEmail(email);
         return "User deleted";
     }
 
     @GetMapping("/getAll")
-    public List<User> getUser() {
-        return service.findAll();
+    public ResponseEntity<List<User>> getUser() {
+
+        return ResponseEntity.ok().body(service.findAll());
     }
 
 
