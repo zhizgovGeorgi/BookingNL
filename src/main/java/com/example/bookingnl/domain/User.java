@@ -5,6 +5,8 @@ import net.bytebuddy.implementation.bind.annotation.Default;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
 @Entity
 @NoArgsConstructor

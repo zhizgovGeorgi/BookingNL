@@ -5,16 +5,12 @@ import com.example.bookingnl.domain.GetUserRequest;
 import com.example.bookingnl.domain.User;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.net.URI;
 import java.util.List;
 
-import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
 @RestController
 @RequestMapping("/api")
@@ -22,29 +18,35 @@ import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 @CrossOrigin
 public class CustomersController {
     private UserService service;
+    @GetMapping("/users")
+    public ResponseEntity<List<User>> getUser() {
+
+        return ResponseEntity.ok().body(service.findAll());
+    }
+
 
     @PostMapping("/register")
     public ResponseEntity<User> saveUser(@RequestBody User user) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/register").toUriString());
-        return ResponseEntity.created(uri).body(service.save(user));
+        return  ResponseEntity.created(uri).body(service.save(user));
     }
 
-    @GetMapping("/token/refresh")
-    public void refreshToken(HttpServletRequest request, HttpServletResponse response) {
-        String authorizationHeader = request.getHeader(AUTHORIZATION);
+    /*@PostMapping("/login")
+    public String logIn(@RequestBody GetUserRequest request) {
+        //URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/register").toUriString());
+        // return ResponseEntity.created(uri).body(service.save(user));
+        if (service.findByEmailAndPassword(request.getEmail(), request.getPassword()) != null){
+            return "Welcome!";
+        }
+        return "Wrong credentials, try again!";
+    }*/
 
-    }
+
 
     @DeleteMapping()
     public String deleteUser(@PathVariable(required = false) String email) {
         service.deleteByEmail(email);
         return "User deleted";
-    }
-
-    @GetMapping("/getAll")
-    public ResponseEntity<List<User>> getUser() {
-
-        return ResponseEntity.ok().body(service.findAll());
     }
 
 
