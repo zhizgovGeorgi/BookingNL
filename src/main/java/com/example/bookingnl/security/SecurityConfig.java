@@ -36,7 +36,7 @@ public class SecurityConfig {
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(STATELESS);
         http.authorizeRequests().antMatchers("/api/getAll").hasAuthority("Customer");
-        http.authorizeRequests().antMatchers("/login/**", "/api/token/refresh/**").permitAll();
+        http.authorizeRequests().antMatchers("/login/**", "/api/token/refresh/**", "/destinations/**").permitAll();
         http.authorizeRequests().anyRequest().permitAll();
         http.addFilter(new CustomAuthenticationFilter(authenticationManager(authenticationConfiguration)));
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);

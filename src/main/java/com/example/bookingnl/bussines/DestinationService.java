@@ -6,7 +6,12 @@ import java.util.List;
 import java.util.Optional;
 
 public interface DestinationService {
-    Optional<List<Destination>> getAllDestinations();
-    Optional<Destination> createDestination(Destination destination);
-    void deleteDestination(Destination destination);
+    Destination saveDestination(Destination destination);
+
+
+    Optional<Destination> findById(long id);
+
+    void deleteDestinationById(long id);
+
+    List<Destination> findAll();
 }

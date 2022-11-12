@@ -1,15 +1,16 @@
 package com.example.bookingnl.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Generated;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +23,7 @@ public class Reservation {
     private Destination destination;
     private Date startDate;
     private Date endDate;
+    @NotNull
     private int guests;
     private double totalPrice;
 }
