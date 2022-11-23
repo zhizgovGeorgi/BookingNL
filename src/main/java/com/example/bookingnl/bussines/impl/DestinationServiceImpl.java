@@ -1,6 +1,7 @@
 package com.example.bookingnl.bussines.impl;
 
 import com.example.bookingnl.bussines.DestinationService;
+import com.example.bookingnl.domain.CreateDestinationRequest;
 import com.example.bookingnl.domain.Destination;
 import com.example.bookingnl.persistence.DestinationRepository;
 import lombok.AllArgsConstructor;
@@ -20,8 +21,13 @@ public class DestinationServiceImpl implements DestinationService {
     }
 
     @Override
-    public Destination saveDestination(Destination destination) {
-        if (repository.findByNameAndLocation(destination.getName(), destination.getLocation()) != null) {
+    public Destination saveDestination(CreateDestinationRequest request) {
+        if (repository.findByNameAndLocation(request.getName(), request.getLocation()) != null) {
+            Destination destination = Destination.builder()
+                    .name(request.getName())
+                    .location(request.getLocation())
+                    .pricePerNight(request.getPricePerNight())
+                    .build();
             return repository.save(destination);
         }
         return null;

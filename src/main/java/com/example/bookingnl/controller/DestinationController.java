@@ -1,6 +1,7 @@
 package com.example.bookingnl.controller;
 
 import com.example.bookingnl.bussines.DestinationService;
+import com.example.bookingnl.domain.CreateDestinationRequest;
 import com.example.bookingnl.domain.Destination;
 import com.example.bookingnl.domain.User;
 import lombok.AllArgsConstructor;
@@ -16,21 +17,21 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/destinations")
 @AllArgsConstructor
-@CrossOrigin
+@CrossOrigin("http://localhost:3000")
 @Transactional
 public class DestinationController {
     private final DestinationService service;
 
 
-    @GetMapping("/getAll")
+    @GetMapping()
     public ResponseEntity<List<Destination>> getDestinations() {
         return ResponseEntity.ok().body(service.findAll());
     }
 
-    @PostMapping("/saveDestination")
-    public ResponseEntity<Destination> saveDestination(@RequestBody Destination destination) {
+    @PostMapping()
+    public ResponseEntity<Destination> saveDestination(@RequestBody CreateDestinationRequest request) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/destinations/saveDestination").toUriString());
-        return ResponseEntity.created(uri).body(service.saveDestination(destination));
+        return ResponseEntity.created(uri).body(service.saveDestination(request));
     }
 
     @GetMapping("{id}")

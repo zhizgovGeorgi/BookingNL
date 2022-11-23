@@ -1,7 +1,9 @@
 package com.example.bookingnl.bussines.impl;
 
 import com.example.bookingnl.bussines.UserService;
+import com.example.bookingnl.domain.CreateUserRequest;
 import com.example.bookingnl.domain.User;
+import com.example.bookingnl.domain.UserResponse;
 import com.example.bookingnl.persistence.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -47,41 +49,42 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return repository.findUserByEmail(email);
     }
 
-    @Override
-    public User findByEmailAndPassword(String email, String password) {
-        return repository.findByEmailAndPassword(email, password);
-    }
 
     @Override
-    public void deleteByEmail(String email) {
-      /*  User user = repository.findByEmail(email);
-        if (user != null) {
-            log.error("User not found");
-        } else {
-            repository.deleteByEmail(email);
-            log.info("User with email {} found", email);
-        }*/
-    }
+    public User save(CreateUserRequest request) {
 
-    @Override
-    public User save(User newUser) {
-
-        if (repository.existsByEmail(newUser.getEmail()) == true) {
+        if (repository.existsByEmail(request.getEmail()) == true) {
             log.error("User not found");
             return null;
             //Email taken
             // TODO
-        } else {
-            log.info("Saving new user {} .", newUser.getFirstName());
-            newUser.setPassword(encoder.encode(newUser.getPassword()));
-            return repository.save(newUser);
         }
+        log.info("Saving new user {} .", request.getFirstName());
+        request.setPassword(encoder.encode(request.getPassword()));
+        User user = User.builder()
+                .firstName(request.getFirstName())
+                .lastName(request.getLastName())
+                .email(request.getEmail())
+                .password(request.getPassword())
+                .adress(request.getAdress())
+                .build();
+        return repository.save(user);
+          /*  if(repository.save(user) != null) {
+                UserResponse response = UserResponse.builder()
+                        .firstName(user.getFirstName())
+                        .lastName(user.getLastName())
+                        .email(user.getEmail())
+                        .adress(user.getAdress())
+                        .role(user.getRole())
+                        .build();
+
+                return response;
+            }
+            return null;*/
     }
 
-    @Override
-    public List<User> findAll() {
-        return repository.findAll();
-    }
+
+
 
 
 }

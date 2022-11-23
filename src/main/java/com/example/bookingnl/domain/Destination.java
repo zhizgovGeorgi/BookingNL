@@ -1,9 +1,6 @@
 package com.example.bookingnl.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.validator.constraints.UniqueElements;
 
 import java.util.List;
@@ -21,6 +18,7 @@ import java.awt.*;
 @NoArgsConstructor
 @Getter
 @Setter
+@Builder
 public class Destination {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

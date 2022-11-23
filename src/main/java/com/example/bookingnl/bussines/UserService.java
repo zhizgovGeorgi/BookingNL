@@ -1,5 +1,6 @@
 package com.example.bookingnl.bussines;
 
+import com.example.bookingnl.domain.CreateUserRequest;
 import com.example.bookingnl.domain.User;
 
 import java.util.List;
@@ -7,11 +8,6 @@ import java.util.List;
 public interface UserService {
     User findByEmail(String email);
 
-    User findByEmailAndPassword(String email, String password);
+    User save(CreateUserRequest request);
 
-    void deleteByEmail(String email);
-
-    User save(User user);
-
-    List<User> findAll();
 }

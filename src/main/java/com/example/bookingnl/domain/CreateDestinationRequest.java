@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Required;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -13,9 +12,10 @@ import javax.validation.constraints.NotNull;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@NotBlank
-@NotNull
-public class GetUserRequest {
-    private String email;
-    private String password;
+
+public class CreateDestinationRequest {
+    private String name;
+    private String location;
+    private double pricePerNight;
+
 }

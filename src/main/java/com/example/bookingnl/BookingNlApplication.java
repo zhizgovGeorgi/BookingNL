@@ -15,7 +15,6 @@ public class BookingNlApplication {
         SpringApplication.run(BookingNlApplication.class, args);
     }
 
-   // CommandLineRunner run(UserService userService){}
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();

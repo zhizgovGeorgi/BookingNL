@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -20,45 +21,28 @@ import javax.validation.constraints.NotNull;
 
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
-@Configuration
+/*@Configuration*/
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
 
     private final AuthenticationConfiguration authenticationConfiguration;
-    private final UserDetailsService userDetailsService;
-
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.cors().and();
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(STATELESS);
-        http.authorizeRequests().antMatchers("/api/getAll").hasAuthority("Customer");
-        http.authorizeRequests().antMatchers("/login/**", "/api/token/refresh/**", "/destinations/**").permitAll();
-        http.authorizeRequests().anyRequest().permitAll();
+        http
+                .authorizeRequests()
+                .antMatchers("/login/**","/destinations/**",
+                        "/api/token/refresh").permitAll();
+        http.authorizeRequests().antMatchers("/api/getAll", "destinations/saveDestination").hasAuthority("Customer")
+                .anyRequest().authenticated();
         http.addFilter(new CustomAuthenticationFilter(authenticationManager(authenticationConfiguration)));
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
-/*        //For h2-console in browser
-        http.
-                headers().
-                frameOptions().
-                and().
-                contentSecurityPolicy("frame-ancestors 'self' " + webserver);
-        http
-                .authorizeRequests()
-                .antMatchers("/login/**",
-                        "/api/token/refresh",
-                        "/h2-console/*").permitAll()
-                .antMatchers("/**").hasAnyAuthority("Customer")
-                .anyRequest().authenticated();*/
-       // http.addFilter(new CustomAuthenticationFilter(authenticationManager(authenticationConfiguration)));
-       // http.addFilterBefore(new CustomAuthorisationFilter(), UsernamePasswordAuthenticationFilter.class);
-        //return http.build();
-
 
     @Bean
     public WebMvcConfigurer corsConfigurer() {
@@ -67,8 +51,8 @@ public class SecurityConfig {
             public void addCorsMappings(@NotNull CorsRegistry registry) {
                 registry
                         .addMapping("/**")
-                        .allowedMethods("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS");
-                     //   .allowedOrigins(webserver);
+                        .allowedMethods("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS")
+                        .allowedOrigins("http://localhost:3000");
             }
         };
     }

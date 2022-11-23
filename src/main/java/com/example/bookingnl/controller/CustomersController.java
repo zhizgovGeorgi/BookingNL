@@ -5,7 +5,7 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.bookingnl.bussines.UserService;
-import com.example.bookingnl.domain.GetUserRequest;
+import com.example.bookingnl.domain.CreateUserRequest;
 import com.example.bookingnl.domain.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
@@ -26,21 +26,17 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RestController
 @RequestMapping("/api")
 @AllArgsConstructor
-@CrossOrigin
+@CrossOrigin("http://localhost:3000")
 @Slf4j
 public class CustomersController {
     private UserService service;
-    @GetMapping("/getAll")
-    public ResponseEntity<List<User>> getUser() {
 
-        return ResponseEntity.ok().body(service.findAll());
-    }
 
 
     @PostMapping("/register")
-    public ResponseEntity<User> saveUser(@RequestBody User user) {
+    public ResponseEntity<User> saveUser(@RequestBody CreateUserRequest request) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/register").toUriString());
-        return  ResponseEntity.created(uri).body(service.save(user));
+        return  ResponseEntity.created(uri).body(service.save(request));
     }
 
     @GetMapping("/token/refresh")
@@ -49,7 +45,7 @@ public class CustomersController {
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             try {
                 String refresh_token = authorizationHeader.substring("Bearer ".length());
-                Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());//TODO
+                Algorithm algorithm = Algorithm.HMAC256("secret".getBytes()); //TODO
                 JWTVerifier verifier = JWT.require(algorithm).build();
                 DecodedJWT decodedJWT = verifier.verify(refresh_token);
                 String username = decodedJWT.getSubject();
@@ -83,11 +79,6 @@ public class CustomersController {
     }
 
 
-    @DeleteMapping()
-    public String deleteUser(@PathVariable(required = false) String email) {
-        service.deleteByEmail(email);
-        return "User deleted";
-    }
 
 
 }
