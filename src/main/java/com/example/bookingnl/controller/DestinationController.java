@@ -1,9 +1,8 @@
 package com.example.bookingnl.controller;
 
 import com.example.bookingnl.bussines.DestinationService;
-import com.example.bookingnl.domain.CreateDestinationRequest;
-import com.example.bookingnl.domain.Destination;
-import com.example.bookingnl.domain.User;
+import com.example.bookingnl.converter.DestinationConverter;
+import com.example.bookingnl.domain.*;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,20 +28,22 @@ public class DestinationController {
     }
 
     @PostMapping()
-    public ResponseEntity<Destination> saveDestination(@RequestBody CreateDestinationRequest request) {
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/destinations/saveDestination").toUriString());
-        return ResponseEntity.created(uri).body(service.saveDestination(request));
+    public ResponseEntity<DestinationResponse> saveDestination(@RequestBody CreateDestinationRequest request) {
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/destinations").toUriString());
+        Destination destination = DestinationConverter.requestToEntity(request);
+        DestinationResponse response = DestinationConverter.entityToResponse(service.saveDestination(destination));
+        return ResponseEntity.created(uri).body(response);
     }
 
     @GetMapping("{id}")
-    public Optional<Destination> getDestination(@PathVariable(value = "id") final long id){
+    public Optional<Destination> getDestination(@PathVariable(value = "id") final long id) {
         return ResponseEntity.ok().body(service.findById(id)).getBody();
 
     }
 
     @DeleteMapping("{id}")
-    public String deleteDestination(@PathVariable(value = "id") final long id){
-      service.deleteDestinationById(id);
-      return "Successful deletion";
+    public String deleteDestination(@PathVariable(value = "id") final long id) {
+        service.deleteDestinationById(id);
+        return "Successful deletion";
     }
 }

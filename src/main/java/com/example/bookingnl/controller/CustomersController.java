@@ -5,11 +5,14 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.bookingnl.bussines.UserService;
+import com.example.bookingnl.converter.UserConverter;
 import com.example.bookingnl.domain.CreateUserRequest;
 import com.example.bookingnl.domain.User;
+import com.example.bookingnl.domain.UserResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -19,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URI;
 import java.util.*;
+
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -34,9 +38,11 @@ public class CustomersController {
 
 
     @PostMapping("/register")
-    public ResponseEntity<User> saveUser(@RequestBody CreateUserRequest request) {
+    public ResponseEntity<UserResponse> saveUser(@RequestBody CreateUserRequest request) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/register").toUriString());
-        return  ResponseEntity.created(uri).body(service.save(request));
+        User user = UserConverter.requestToEntity(request);
+        UserResponse response = UserConverter.entityToResponse(service.save(user));
+        return ResponseEntity.created(uri).body(response);
     }
 
     @GetMapping("/token/refresh")
@@ -65,7 +71,6 @@ public class CustomersController {
             } catch (Exception ex) {
                 response.setHeader("error", ex.getMessage());
                 response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-                //   response.sendError(HttpServletResponse.SC_FORBIDDEN);
                 Map<String, String> error = new HashMap<>();
                 error.put("error_message", ex.getMessage());
                 response.setContentType(APPLICATION_JSON_VALUE);
@@ -73,12 +78,10 @@ public class CustomersController {
             }
 
         } else {
-           throw new RuntimeException("Refresh token is missing");
+            throw new RuntimeException("Refresh token is missing");
 
         }
     }
-
-
 
 
 }

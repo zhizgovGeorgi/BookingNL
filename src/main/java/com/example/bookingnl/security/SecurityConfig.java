@@ -35,7 +35,7 @@ public class SecurityConfig {
         http.sessionManagement().sessionCreationPolicy(STATELESS);
         http
                 .authorizeRequests()
-                .antMatchers("/login/**","/destinations/**",
+                .antMatchers("/login/**","/destinations/**","/api/register",
                         "/api/token/refresh").permitAll();
         http.authorizeRequests().antMatchers("/api/getAll", "destinations/saveDestination").hasAuthority("Customer")
                 .anyRequest().authenticated();

@@ -11,6 +11,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Getter
 @Setter
+@Builder
 public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,6 +22,7 @@ public class Reservation {
     @ManyToOne()
     @JoinColumn(name = "destinationId", referencedColumnName = "id")
     private Destination destination;
+
     private Date startDate;
     private Date endDate;
     @NotNull

@@ -51,23 +51,16 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 
     @Override
-    public User save(CreateUserRequest request) {
+    public User save(User user) {
 
-        if (repository.existsByEmail(request.getEmail()) == true) {
+        if (repository.existsByEmail(user.getEmail()) == true) {
             log.error("User not found");
             return null;
             //Email taken
             // TODO
         }
-        log.info("Saving new user {} .", request.getFirstName());
-        request.setPassword(encoder.encode(request.getPassword()));
-        User user = User.builder()
-                .firstName(request.getFirstName())
-                .lastName(request.getLastName())
-                .email(request.getEmail())
-                .password(request.getPassword())
-                .adress(request.getAdress())
-                .build();
+        log.info("Saving new user {} .", user.getFirstName());
+        user.setPassword(encoder.encode(user.getPassword()));
         return repository.save(user);
           /*  if(repository.save(user) != null) {
                 UserResponse response = UserResponse.builder()

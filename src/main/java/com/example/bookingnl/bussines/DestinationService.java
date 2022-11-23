@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface DestinationService {
-    Destination saveDestination(CreateDestinationRequest request);
+    Destination saveDestination(Destination destination);
 
 
     Optional<Destination> findById(long id);

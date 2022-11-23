@@ -7,6 +7,6 @@ import com.example.bookingnl.domain.User;
 public interface UserService {
     User findByEmail(String email);
 
-    User save(CreateUserRequest request);
+    User save(User user);
 
 }

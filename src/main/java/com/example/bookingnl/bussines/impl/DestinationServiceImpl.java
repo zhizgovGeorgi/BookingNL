@@ -21,13 +21,9 @@ public class DestinationServiceImpl implements DestinationService {
     }
 
     @Override
-    public Destination saveDestination(CreateDestinationRequest request) {
-        if (repository.findByNameAndLocation(request.getName(), request.getLocation()) != null) {
-            Destination destination = Destination.builder()
-                    .name(request.getName())
-                    .location(request.getLocation())
-                    .pricePerNight(request.getPricePerNight())
-                    .build();
+    public Destination saveDestination(Destination destination) {
+        if (repository.findByNameAndLocation(destination.getName(), destination.getLocation()) != null) {
+
             return repository.save(destination);
         }
         return null;

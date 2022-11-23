@@ -4,6 +4,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.core.GrantedAuthorityDefaults;
@@ -31,7 +32,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @Slf4j
 public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private final AuthenticationManager authenticationManager;
-    private Tokens tokens;
+
 
     public CustomAuthenticationFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
@@ -51,8 +52,17 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) throws IOException, ServletException {
         User user = (User) authentication.getPrincipal();
         Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
-        String access_token =tokens.accessToken(user, request, algorithm);
-       String refresh_token = tokens.refreshToken(user, request, algorithm);
+        String access_token = JWT.create()
+                .withSubject(user.getUsername())
+                .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 * 1000))
+                .withIssuer(request.getRequestURL().toString())
+                .withClaim("roles", user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
+                .sign(algorithm);
+        String refresh_token = JWT.create()
+                .withSubject(user.getUsername())
+                .withExpiresAt(new Date(System.currentTimeMillis() + 15 * 60 * 1000))
+                .withIssuer(request.getRequestURL().toString())
+                .sign(algorithm);
         Map<String, String> tokens = new HashMap<>();
         tokens.put("access_token", access_token);
         tokens.put("refresh_token", refresh_token);
