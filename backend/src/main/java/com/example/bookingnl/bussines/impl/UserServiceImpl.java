@@ -1,9 +1,7 @@
 package com.example.bookingnl.bussines.impl;
 
 import com.example.bookingnl.bussines.UserService;
-import com.example.bookingnl.domain.CreateUserRequest;
 import com.example.bookingnl.domain.User;
-import com.example.bookingnl.domain.UserResponse;
 import com.example.bookingnl.persistence.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,14 +10,12 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 
 @Service

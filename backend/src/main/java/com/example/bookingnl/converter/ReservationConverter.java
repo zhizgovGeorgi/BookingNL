@@ -1,8 +1,8 @@
 package com.example.bookingnl.converter;
 
+import com.example.bookingnl.controller.CreateReservationRequest;
+import com.example.bookingnl.controller.ReservationResponse;
 import com.example.bookingnl.domain.*;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
 
 
 public class ReservationConverter {

@@ -1,15 +1,8 @@
 package com.example.bookingnl.converter;
 
-import com.example.bookingnl.domain.CreateUserRequest;
+import com.example.bookingnl.controller.CreateUserRequest;
 import com.example.bookingnl.domain.User;
-import com.example.bookingnl.domain.UserResponse;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Bean;
-
-import javax.transaction.Transactional;
-
+import com.example.bookingnl.controller.UserResponse;
 
 
 public  class UserConverter {

@@ -1,6 +1,5 @@
 package com.example.bookingnl.bussines;
 
-import com.example.bookingnl.domain.CreateDestinationRequest;
 import com.example.bookingnl.domain.Destination;
 
 import java.util.List;

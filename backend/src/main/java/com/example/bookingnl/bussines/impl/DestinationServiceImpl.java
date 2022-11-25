@@ -1,7 +1,6 @@
 package com.example.bookingnl.bussines.impl;
 
 import com.example.bookingnl.bussines.DestinationService;
-import com.example.bookingnl.domain.CreateDestinationRequest;
 import com.example.bookingnl.domain.Destination;
 import com.example.bookingnl.persistence.DestinationRepository;
 import lombok.AllArgsConstructor;

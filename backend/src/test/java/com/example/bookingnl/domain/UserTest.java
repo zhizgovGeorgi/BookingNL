@@ -1,5 +1,6 @@
 package com.example.bookingnl.domain;
 
+import com.example.bookingnl.controller.CreateUserRequest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

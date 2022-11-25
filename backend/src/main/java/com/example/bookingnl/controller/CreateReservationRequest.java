@@ -1,13 +1,12 @@
-package com.example.bookingnl.domain;
+package com.example.bookingnl.controller;
 
+import com.example.bookingnl.domain.Destination;
+import com.example.bookingnl.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Data

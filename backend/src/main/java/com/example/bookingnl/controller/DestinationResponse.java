@@ -1,4 +1,4 @@
-package com.example.bookingnl.domain;
+package com.example.bookingnl.controller;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
