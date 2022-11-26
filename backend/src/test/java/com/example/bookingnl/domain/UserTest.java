@@ -43,12 +43,7 @@ public class UserTest {
         assertEquals(actual, expected);
     }
 
-   /* @Test
-    void getRole() {
-        String actual = user.getRole();
-        String expected = "admin";
-        assertEquals(actual, expected);
-    }*/
+
 
     private User createUser(){
         User user = User.builder().id(2L).firstName("petar").lastName("behcet").adress("street").email("bobby@gmail.com").password("ahmed-3").build();

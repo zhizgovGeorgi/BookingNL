@@ -15,6 +15,7 @@ public  class UserConverter {
                 .email(request.getEmail())
                 .password(request.getPassword())
                 .adress(request.getAdress())
+                .role(request.getRole())
                 .build();
         return  user;
     }

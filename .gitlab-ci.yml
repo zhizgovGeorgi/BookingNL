@@ -8,6 +8,7 @@ variables:
 stages:
   - build
   - test
+  -.post
 
 build:
    stage: build 
