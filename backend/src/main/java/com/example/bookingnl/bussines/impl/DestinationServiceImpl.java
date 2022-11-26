@@ -36,9 +36,12 @@ public class DestinationServiceImpl implements DestinationService {
     }
 
     @Override
-    public void deleteDestinationById(long id)  {
+    public void deleteDestinationById(long id) throws Exception {
         if (repository.findById(id) != null) {
             repository.deleteDestinationById(id);
+        }
+        else {
+            throw new Exception("You have not selected a destination to be deleted!");
         }
     }
 }

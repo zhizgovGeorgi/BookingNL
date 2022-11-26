@@ -43,7 +43,12 @@ public class DestinationController {
 
     @DeleteMapping("{id}")
     public String deleteDestination(@PathVariable(value = "id") final long id) {
-        service.deleteDestinationById(id);
-        return "Successful deletion";
+        try {
+            service.deleteDestinationById(id);
+            return "Successful deletion";
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }

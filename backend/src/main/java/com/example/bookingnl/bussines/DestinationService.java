@@ -11,7 +11,7 @@ public interface DestinationService {
 
     Optional<Destination> findById(long id);
 
-    void deleteDestinationById(long id);
+    void deleteDestinationById(long id) throws Exception;
 
     List<Destination> findAll();
 }
