@@ -19,3 +19,8 @@ test:
    script:
      - cd backend
      - .\gradlew test
+sonarqube:
+   stage: .post
+   script:
+     - cd backend
+     - .\gradlew sonarqube
