@@ -5,7 +5,7 @@ import { Container, Paper, Button } from '@material-ui/core';
 import UserService from '../functions/UserService';
 import axios from 'axios';
 import { Outlet } from 'react-router-dom';
-
+import {useNavigate} from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Register() {
-
+  const navigate = useNavigate();
   
     const paperStyle = {padding: '50px 20px', width:600, margin:"20px auto "}
   const [firstName, setFName]=useState('');
@@ -28,21 +28,11 @@ export default function Register() {
     const classes = useStyles();
 
     
-    // const register=(e)=>{
-    //   e.preventDefault()
-    //   const user={firstName, lastName, adress, email, password, role}
-    //   console.log(user)
-    //   fetch("http://localhost:9091/customers",{
-    //     method:"POST",
-    //     headers:{"Content-Type":"application/json"},
-    //     body:JSON.stringify(user)
-    //   }).then(()=>{
-    //     console.log("New user added!")
-    //   })
-    // }
+  
  const register = async () =>{
-  const user={firstName, lastName, adress, email, password}
+  const user={firstName, lastName, adress, email, password, role}
   UserService.register({user})
+  navigate("/login")
 }
 
 

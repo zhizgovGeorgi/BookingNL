@@ -16,6 +16,7 @@ const register = (user) => {
 
 const logout = () => {
    sessionStorage.clear();
+   window.location.reload();
 }
 
 

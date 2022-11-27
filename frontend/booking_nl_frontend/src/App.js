@@ -16,11 +16,11 @@ function App() {
       <BrowserRouter>
       <AppBar/>
         <Routes>
-          <Route path='/getAll' element={<Home />} />
+          <Route path='/' element={<Home />} />
           <Route path='/createDestinations' element={<CreateDestination />} />
           
           <Route path='/register' element={ <Register/>} />
-          <Route path='/singleDestination' element={ <SingleDestination/>} />
+          <Route path={`/singleDestination/:id`} element={ <SingleDestination/>} />
           <Route path='/login' element={ <LogIn/>} />
         </Routes>
       </BrowserRouter>

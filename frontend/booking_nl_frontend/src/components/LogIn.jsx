@@ -2,10 +2,9 @@ import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import { Container, Paper, Button } from '@material-ui/core';
-import login from '../functions/login'
-import { Outlet } from 'react-router-dom';
-import axios from 'axios';
-import { Home } from '@material-ui/icons';
+import login from '../functions/login';
+import {useNavigate} from 'react-router-dom';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -17,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function LogIn() {
- 
+  const navigate = useNavigate();
   
     const paperStyle = {padding: '50px 20px', width:600, margin:"20px auto "}
     const [email, setEmail]=useState('');
@@ -27,16 +26,11 @@ export default function LogIn() {
   
 
      
-      // const logIn = async () =>{
-      //   const getRequest={email, password}
-      //   let res = await api.post("/login", getRequest)
-      //   sessionStorage.setItem("token", JSON.stringify(res));
-      //   console.log(sessionStorage.getItem("token"));
-      // }
+      
       
       const logIn = async()=>{
         login({email, password});
-           //console.log(sessionStorage.getItem("token"));
+       navigate("/");
       }
 
 

@@ -1,9 +1,8 @@
 import axios from "axios";
 
-
 export default async function login({ email, password }) {
-
-  var qs = require("qs");
+  
+    var qs = require("qs");
 
 
 
@@ -28,13 +27,14 @@ export default async function login({ email, password }) {
     }),
 
   };
-
   return axios(config)
+ 
 
     .then((response) =>       { 
     sessionStorage.setItem("accessToken", response.data.access_token) 
     sessionStorage.setItem("refreshToken", response.data.refresh_token) 
     sessionStorage.setItem("role", response.data.role)
+    window.location.reload();
   }  )
 
     .catch((err) => {

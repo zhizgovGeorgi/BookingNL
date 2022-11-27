@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     useEffect(()=>{
       const role = sessionStorage.getItem("role");
       if (role !== "[Customer]") {
-       navigate("/getAll");
+       navigate("/");
   
       }
   },[])

@@ -32,13 +32,25 @@ const [buttons, setButtons] = useState(null);
 
   useEffect(()=>{
     const role = sessionStorage.getItem("role");
-    if (role === "[Customer]" ) {
+    if (role === "[Admin]" ) {
      setButtons(<>
      <Button color="white" > <Link to={'/createDestinations'}>Create Destinations</Link></Button>
-     <Button onClick={UserService.logout} color="inherit" > <Link to={'/getAll'}>Log Out</Link></Button>
+     <Button onClick={UserService.logout} color="inherit" > <Link to={'/'}>Log Out</Link></Button>
      </>);
      
     }
+    else if (role === "[Customer]" ) {
+      setButtons(<>
+      <Button onClick={UserService.logout} color="inherit" > <Link to={'/'}>Log Out</Link></Button>
+      </>);
+      
+     }
+     else if (role === "[Admin]" || role === "[Customer]") {
+      setButtons(<>
+      <Button onClick={UserService.logout} color="inherit" > <Link to={'/'}>Log Out</Link></Button>
+      </>);
+      
+     }
     else{
       setButtons(<>
        <Button  color="white" > <Link to={'/login'}>Log in</Link></Button>
@@ -62,7 +74,7 @@ const [buttons, setButtons] = useState(null);
           <Typography variant="h6" className={classes.title}>
             Booking NL
           </Typography>
-          <Button  color="inherit" > <Link to={'/getAll'}>Home</Link></Button>
+          <Button  color="inherit" > <Link to={'/'}>Home</Link></Button>
           {buttons} 
 
          
