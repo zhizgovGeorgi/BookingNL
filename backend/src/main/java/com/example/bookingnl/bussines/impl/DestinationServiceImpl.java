@@ -21,7 +21,7 @@ public class DestinationServiceImpl implements DestinationService {
 
     @Override
     public Destination saveDestination(Destination destination) {
-        if (repository.findByNameAndLocation(destination.getName(), destination.getLocation()) != null) {
+        if (repository.findByNameAndLocation(destination.getName(), destination.getLocation()).isEmpty()) {
 
             return repository.save(destination);
         }
@@ -31,12 +31,12 @@ public class DestinationServiceImpl implements DestinationService {
 
 
     @Override
-    public Optional<Destination> findById(long id) {
+    public Optional<Destination> findById(Long id) {
         return repository.findById(id);
     }
 
     @Override
-    public void deleteDestinationById(long id) throws Exception {
+    public void deleteDestinationById(Long id) throws Exception {
         if (repository.findById(id) != null) {
             repository.deleteDestinationById(id);
         }

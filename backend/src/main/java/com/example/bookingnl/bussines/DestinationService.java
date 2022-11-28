@@ -9,9 +9,9 @@ public interface DestinationService {
     Destination saveDestination(Destination destination);
 
 
-    Optional<Destination> findById(long id);
+    Optional<Destination> findById(Long id);
 
-    void deleteDestinationById(long id) throws Exception;
+    void deleteDestinationById(Long id) throws Exception;
 
     List<Destination> findAll();
 }

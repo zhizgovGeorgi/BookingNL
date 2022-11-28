@@ -21,7 +21,19 @@ const saveDestination = (destination) => {
         }
      }).then(response=>{
         console.log('kur',response.data)
-     });
+     }).catch((err) => {
+
+        if (err.response.status === 403) {
+  
+          alert("There is already a destination with the same location and name");
+  
+        }else{
+
+            throw new Error();
+    
+          }
+    })
+     ;
 }
 
 
@@ -32,6 +44,7 @@ const deleteDestination = (id) => {
         }
     }).then(response=>{
         console.log('kur',response.data)
+
     });
 }
 

@@ -13,9 +13,9 @@ public interface DestinationRepository extends JpaRepository<Destination, Long> 
 
     Optional<Destination> findByNameAndLocation(String name, String location);
 
-    Optional<Destination> findById(long id);
+    Optional<Destination> findById(Long id);
 
-    void deleteDestinationById(long id);
+    void deleteDestinationById(Long id);
 
     List<Destination> findAll();
 }

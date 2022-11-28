@@ -36,13 +36,13 @@ public class DestinationController {
     }
 
     @GetMapping("{id}")
-    public Optional<Destination> getDestination(@PathVariable(value = "id") final long id) {
+    public Optional<Destination> getDestination(@PathVariable("id") Long id) {
         return ResponseEntity.ok().body(service.findById(id)).getBody();
 
     }
 
     @DeleteMapping("{id}")
-    public String deleteDestination(@PathVariable(value = "id") final long id) {
+    public String deleteDestination(@PathVariable("id") Long id) {
         try {
             service.deleteDestinationById(id);
             return "Successful deletion";

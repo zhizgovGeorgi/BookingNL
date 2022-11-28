@@ -67,9 +67,9 @@ const useStyles = makeStyles((theme) => ({
                 </Typography>
               </Grid>
               <Grid item>
-                <Typography  variant="body2" style={{ cursor: 'pointer' }}>
+                {/* <Typography  variant="body2" style={{ cursor: 'pointer' }}>
                   Remove
-                </Typography>
+                </Typography> */}
                 <Button  color="white" > <Link to={`/singleDestination/${destination.id}`}>Show</Link></Button>
               </Grid>
             </Grid>
