@@ -27,5 +27,8 @@ public class Reservation {
     private Date endDate;
     @NotNull
     private int guests;
+
     private double totalPrice;
+
+
 }

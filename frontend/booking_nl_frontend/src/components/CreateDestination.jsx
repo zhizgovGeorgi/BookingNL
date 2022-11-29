@@ -7,6 +7,7 @@ import axios from 'axios';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Home } from './Home';
 import {useNavigate} from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -43,8 +44,9 @@ const useStyles = makeStyles((theme) => ({
     
    const saveDestination = async () =>{
     const destination={name, location, pricePerNight}
-    let res = DestinationService.saveDestination({destination})
-    console.log(res);
+    DestinationService.saveDestination({destination}).then(res=>{
+      navigate('/') 
+    })
   }
   
   

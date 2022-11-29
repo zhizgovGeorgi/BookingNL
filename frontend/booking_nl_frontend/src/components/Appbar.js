@@ -41,6 +41,7 @@ const [buttons, setButtons] = useState(null);
     }
     else if (role === "[Customer]" ) {
       setButtons(<>
+       <Button color="white" > <Link to={'/makeReservation'}>Make Reservation</Link></Button>
       <Button onClick={UserService.logout} color="inherit" > <Link to={'/'}>Log Out</Link></Button>
       </>);
       

@@ -6,6 +6,8 @@ import UserService from '../functions/UserService';
 import axios from 'axios';
 import { Outlet } from 'react-router-dom';
 import {useNavigate} from 'react-router-dom';
+import { toast } from 'react-toastify';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Register() {
+  
   const navigate = useNavigate();
   
     const paperStyle = {padding: '50px 20px', width:600, margin:"20px auto "}
@@ -29,16 +32,23 @@ export default function Register() {
 
     
   
- const register = async () =>{
+ const register =  () =>{
   const user={firstName, lastName, adress, email, password, role}
-  UserService.register({user})
-  navigate("/login")
+
+   UserService.register({user}).then(res=>{
+    navigate('/login') 
+    toast.success("Successful registration! Time to log in!")
+  })
+   
+   // navigate("/login")
+  
 }
 
 
   return (
     
     <Container>
+      
         <Paper elevation={3} style={paperStyle}>
             <h1 style={{color:"blue"}}><u>Register</u></h1>
     <form className={classes.root} noValidate autoComplete="off">
@@ -68,6 +78,7 @@ export default function Register() {
     </form>
     
     </Paper>
+    
     </Container>
     
   );

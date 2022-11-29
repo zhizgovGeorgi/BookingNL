@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export default async function login({ email, password }) {
   
@@ -35,13 +36,13 @@ export default async function login({ email, password }) {
     sessionStorage.setItem("refreshToken", response.data.refresh_token) 
     sessionStorage.setItem("role", response.data.role)
     window.location.reload();
-  }  )
+  } , toast.success('Weolcome back nigga!') )
 
     .catch((err) => {
 
       if (err.response.status === 403) {
 
-        alert("The email and the password do not match");
+        alert(toast.error("The email and the password do not match"));
 
       }else{
 

@@ -4,6 +4,8 @@ import TextField from '@material-ui/core/TextField';
 import { Container, Paper, Button } from '@material-ui/core';
 import login from '../functions/login';
 import {useNavigate} from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { useEffect } from 'react';
 
 
 
@@ -15,9 +17,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
+
 export default function LogIn() {
   const navigate = useNavigate();
   
+  useEffect(()=>{
+    const role = sessionStorage.getItem("role");
+    if (sessionStorage.length!= 0 ) {
+     navigate('/');     
+    }
+  },[])
     const paperStyle = {padding: '50px 20px', width:600, margin:"20px auto "}
     const [email, setEmail]=useState('');
     const [password, setPassword]=useState('');
@@ -29,8 +39,10 @@ export default function LogIn() {
       
       
       const logIn = async()=>{
-        login({email, password});
-       navigate("/");
+        login({email, password}).then(res=>{
+          navigate("/");
+
+        })
       }
 
 
