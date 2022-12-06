@@ -9,6 +9,7 @@ import SingleDestination from './components/SingleDestination';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import MakeReservation from './components/MakeReservation';
+import Profile from './components/Profile.jsx';
 
 
 function App() {
@@ -37,6 +38,7 @@ theme="dark"
           <Route path={`/singleDestination/:id`} element={ <SingleDestination/>} />
           <Route path='/login' element={ <LogIn/>} />
           <Route path='/makeReservation' element={ <MakeReservation/>} />
+          <Route path='/profile' element={ <Profile/>} />
 
         </Routes>
       </BrowserRouter>

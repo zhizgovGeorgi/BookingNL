@@ -21,8 +21,8 @@ public class ReservationsController {
     private ReservationService service;
 
     @GetMapping()
-    public ResponseEntity<List<Reservation>> getDestinations() {
-        return ResponseEntity.ok().body(service.findAllReservations());
+    public ResponseEntity<List<Reservation>> getDestinations(@RequestParam Long userId) {
+        return ResponseEntity.ok().body(service.findAllReservationsByUserId(userId));
     }
 
     @PostMapping()

@@ -5,10 +5,10 @@ import com.example.bookingnl.domain.User;
 import com.example.bookingnl.controller.UserResponse;
 
 
-public  class UserConverter {
+public class UserConverter {
 
 
-    public static User requestToEntity(CreateUserRequest request){
+    public static User requestToEntity(CreateUserRequest request) {
         User user = User.builder()
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
@@ -17,13 +17,17 @@ public  class UserConverter {
                 .adress(request.getAdress())
                 .role(request.getRole())
                 .build();
-        return  user;
+        return user;
     }
 
-    public static UserResponse entityToResponse(User user){
+    public static UserResponse entityToResponse(User user) {
         UserResponse response = UserResponse.builder()
                 .id(user.getId())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .email(user.getEmail())
+                .adress(user.getAdress())
                 .build();
-        return  response;
+        return response;
     }
 }

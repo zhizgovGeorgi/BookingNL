@@ -18,7 +18,13 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
+  // useEffect(()=>{
+  //     const role = sessionStorage.getItem("role");
+  //     if (role !== "[Admin]") {
+  //      navigate("/");
   
+  //     }
+  // },[])
   
 export default function MakeReservation(){
     const paperStyle = {padding: '50px 20px', width:600, margin:"20px auto "}
@@ -42,11 +48,14 @@ export default function MakeReservation(){
       shrink: true,
     }}
   />
-           <TextField id="outlined-basic" label="End Date" variant="outlined" fullWidth
-          value={endDate}
-          onChange={(e)=>setEndDate(e.target.value)}
-          />
-           <TextField id="outlined-basic" label="Number of guests" variant="outlined" fullWidth
+          <TextField id="date"label="End Date"type="date"defaultValue="2017-05-24"value={endDate}
+    onChange={(e)=>setEndDate(e.target.value)}
+    className={classes.textField}
+    InputLabelProps={{
+      shrink: true,
+    }}
+  />
+           <TextField id="outlined-basic" label="Number of guests" type="number"variant="outlined" fullWidth
           value={guests}
           onChange={(e)=>setGuests(e.target.value)}
           />

@@ -42,6 +42,13 @@ public class CustomersController {
         return ResponseEntity.created(uri).body(response);
     }
 
+    @GetMapping
+    public ResponseEntity<UserResponse> getUserByEmail(@RequestParam(value = "email") String email){
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api").toUriString());
+        UserResponse response = UserConverter.entityToResponse(service.findByEmail(email));
+        return ResponseEntity.created(uri).body(response);
+    }
+
     @GetMapping("/token/refresh")
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String authorizationHeader = request.getHeader(AUTHORIZATION);

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 
 const userURL = 'http://localhost:9091/api';
-
+const jwtToken = sessionStorage.getItem("accessToken");
 
 const register =  (user) => {
  
@@ -35,9 +35,17 @@ const logout = () => {
    window.location.reload();
 }
 
+const getUser = (email) =>{
+  return axios.get(`${userURL}`, email.email, {
+    headers:{
+        'Authorization':"Bearer " + jwtToken
+    }
+})
+}
 
 
 export default  {
  register,
- logout
+ logout, 
+ getUser
 }

@@ -19,7 +19,7 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public List<Reservation> findAllReservations() {
-        return repository.findAll();
+    public List<Reservation> findAllReservationsByUserId(Long userId) {
+        return repository.findAllByUserId(userId);
     }
 }

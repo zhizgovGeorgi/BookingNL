@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface ReservationService {
     Reservation saveReservation(Reservation reservation);
-    List<Reservation> findAllReservations();
+    List<Reservation> findAllReservationsByUserId(Long userId);
 }

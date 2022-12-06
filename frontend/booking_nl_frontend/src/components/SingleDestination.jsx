@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import Button from '@material-ui/core/Button';
 import CreateDesination from "./CreateDestination";
 import React from 'react';
+import '../customcss/SingleDestination.css';
 
 
 
@@ -44,7 +45,7 @@ export default function SingleDestination() {
  
 
   return (
-    <div >
+    <div className="destinationInfo" >
       {destination &&
         <div key={destination.id}>
          Name: {destination.name}, 

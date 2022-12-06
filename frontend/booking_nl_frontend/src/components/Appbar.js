@@ -6,10 +6,11 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import UserService from '../functions/UserService';
 import saveDestination from '../functions/DestinationService'
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Appbar() {
   const classes = useStyles();
+  const navigate = useNavigate();
 //const [role, setRole] = useState('');
 const [buttons, setButtons] = useState(null);
 
@@ -42,12 +44,6 @@ const [buttons, setButtons] = useState(null);
     else if (role === "[Customer]" ) {
       setButtons(<>
        <Button color="white" > <Link to={'/makeReservation'}>Make Reservation</Link></Button>
-      <Button onClick={UserService.logout} color="inherit" > <Link to={'/'}>Log Out</Link></Button>
-      </>);
-      
-     }
-     else if (role === "[Admin]" || role === "[Customer]") {
-      setButtons(<>
       <Button onClick={UserService.logout} color="inherit" > <Link to={'/'}>Log Out</Link></Button>
       </>);
       
@@ -69,8 +65,10 @@ const [buttons, setButtons] = useState(null);
       <AppBar position="static">
         <Toolbar>
           
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon  />
+          <IconButton edge="start"  className={classes.menuButton} color="inherit" aria-label="menu">
+          <Link to={'/'}>
+            <AccountCircleIcon  />
+            </Link>
           </IconButton>
           <Typography variant="h6" className={classes.title}>
             Booking NL
