@@ -22,13 +22,21 @@ public class Reservation {
     @ManyToOne()
     @JoinColumn(name = "destinationId", referencedColumnName = "id")
     private Destination destination;
-
+    @Setter(AccessLevel.NONE)
     private Date startDate;
     private Date endDate;
     @NotNull
+
     private int guests;
 
     private double totalPrice;
 
-
+    public void setStartDate(Date startDate) throws Exception {
+        if (startDate.compareTo(endDate) >0){
+            this.startDate = startDate;
+        }
+        else{
+            throw new Exception("Start cannot be before end date");
+        }
+    }
 }

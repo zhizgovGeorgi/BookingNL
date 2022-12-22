@@ -24,6 +24,15 @@ public class Destination {
     @NotBlank
     private String location;
     @NotNull
+    @Setter(AccessLevel.NONE)
     private double pricePerNight;
 
+    public void setPricePerNight(double pricePerNight) throws Exception {
+        if(pricePerNight>0){
+            this.pricePerNight = pricePerNight;
+        }
+        else {
+            throw new Exception("Price cannot 0 or less");
+        }
+    }
 }

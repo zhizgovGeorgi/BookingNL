@@ -42,8 +42,16 @@ public class CustomersController {
         return ResponseEntity.created(uri).body(response);
     }
 
-    @GetMapping
-    public ResponseEntity<UserResponse> getUserByEmail(@RequestParam(value = "email") String email){
+    @PutMapping()
+    public ResponseEntity<User> updateUserDetails(@RequestBody UpdateUserRequest request) {
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api").toUriString());
+        User user = service.findByEmail(request.getEmail());
+        service.save(UserConverter.updateRequestToUser(user, request));
+        return ResponseEntity.created(uri).body(user);
+    }
+
+    @PostMapping
+    public ResponseEntity<UserResponse> getUserByEmail(@RequestParam String email){
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api").toUriString());
         UserResponse response = UserConverter.entityToResponse(service.findByEmail(email));
         return ResponseEntity.created(uri).body(response);

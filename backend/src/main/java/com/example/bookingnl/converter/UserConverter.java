@@ -1,8 +1,10 @@
 package com.example.bookingnl.converter;
 
 import com.example.bookingnl.controller.CreateUserRequest;
+import com.example.bookingnl.controller.UpdateUserRequest;
 import com.example.bookingnl.domain.User;
 import com.example.bookingnl.controller.UserResponse;
+import org.hibernate.sql.Update;
 
 
 public class UserConverter {
@@ -29,5 +31,12 @@ public class UserConverter {
                 .adress(user.getAdress())
                 .build();
         return response;
+    }
+
+    public static User updateRequestToUser(User user, UpdateUserRequest request) {
+                user.setFirstName(request.getFirstName());
+                user.setLastName(request.getLastName());
+                user.setAdress(request.getAdress());
+        return user;
     }
 }

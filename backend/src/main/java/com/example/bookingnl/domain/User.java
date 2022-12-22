@@ -3,9 +3,7 @@ package com.example.bookingnl.domain;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 
 @Entity
 @NoArgsConstructor
@@ -36,4 +34,13 @@ public class User {
     private String adress;
     @Column(columnDefinition = "varchar(255) default 'Customer'")
     private String role;
+
+//    public void setPassword(String password) throws Exception {
+//        if(password.length()>= 6){
+//            this.password = password;
+//        }
+//        else{
+//            throw new Exception("Password should contain more than 6 signs");
+//        }
+//    }
 }

@@ -10,7 +10,8 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import MakeReservation from './components/MakeReservation';
 import Profile from './components/Profile.jsx';
-
+import Chat from './components/Chat';
+import ChatService from './functions/ChatService';
 
 function App() {
   return (
@@ -39,6 +40,7 @@ theme="dark"
           <Route path='/login' element={ <LogIn/>} />
           <Route path='/makeReservation' element={ <MakeReservation/>} />
           <Route path='/profile' element={ <Profile/>} />
+          <Route path='/chat' element={ <ChatService/>} />
 
         </Routes>
       </BrowserRouter>

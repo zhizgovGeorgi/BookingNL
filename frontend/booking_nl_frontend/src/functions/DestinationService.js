@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 const destinationsURL = 'http://localhost:9091/destinations';
 const jwtToken = window.sessionStorage.getItem('accessToken');
 
+
 const getAllDestinations = async () => {
     try {
           return await axios.get(`${destinationsURL}`);

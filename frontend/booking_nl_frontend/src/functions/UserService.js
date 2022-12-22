@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 
 const userURL = 'http://localhost:9091/api';
 const jwtToken = sessionStorage.getItem("accessToken");
+const refreshToken = sessionStorage.getItem("refreshToken");
 
 const register =  (user) => {
  
@@ -30,16 +31,38 @@ const register =  (user) => {
   })
   }
 
+// const refresh=()=>{
+//   axios.post(`${userURL}/token/refresh`, {
+//     headers:{
+//         'Authorization':"Bearer " + refreshToken
+//     }
+// })}
+
 const logout = () => {
    sessionStorage.clear();
    window.location.reload();
 }
 
 const getUser = (email) =>{
-  return axios.get(`${userURL}`, email.email, {
+  return axios.post(`${userURL}`, email, {
+    params:{
+'email': email
+    },
     headers:{
         'Authorization':"Bearer " + jwtToken
     }
+})
+}
+
+const updateUserDetails = (userRequest) =>{
+  return axios.put(`${userURL}`, userRequest.userRequest, {
+    headers:{
+        'Authorization':"Bearer " + jwtToken
+    }
+}).then(response => {
+  console.log('kur', response.data);
+  toast.success("Succesful update of your profile details!")
+
 })
 }
 
@@ -47,5 +70,6 @@ const getUser = (email) =>{
 export default  {
  register,
  logout, 
- getUser
+ getUser,
+ updateUserDetails
 }

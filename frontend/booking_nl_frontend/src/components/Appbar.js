@@ -11,6 +11,7 @@ import { useEffect } from 'react';
 import UserService from '../functions/UserService';
 import saveDestination from '../functions/DestinationService'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import jwtDecode from 'jwt-decode';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,10 +35,18 @@ const [buttons, setButtons] = useState(null);
 
   useEffect(()=>{
     const role = sessionStorage.getItem("role");
+  //  const decodedToken = jwtDecode(sessionStorage.getItem("accessToken")).sub;
+
+
     if (role === "[Admin]" ) {
      setButtons(<>
-     <Button color="white" > <Link to={'/createDestinations'}>Create Destinations</Link></Button>
+     <Button  color="white" > <Link to={'/createDestinations'}>Create Destinations</Link></Button>
      <Button onClick={UserService.logout} color="inherit" > <Link to={'/'}>Log Out</Link></Button>
+     <IconButton edge="start"  className={classes.menuButton} color="inherit" aria-label="menu">
+          <Link to={'/profile'}>
+            <AccountCircleIcon  />
+            </Link>
+          </IconButton>
      </>);
      
     }
@@ -45,6 +54,11 @@ const [buttons, setButtons] = useState(null);
       setButtons(<>
        <Button color="white" > <Link to={'/makeReservation'}>Make Reservation</Link></Button>
       <Button onClick={UserService.logout} color="inherit" > <Link to={'/'}>Log Out</Link></Button>
+      <IconButton edge="start"  className={classes.menuButton} color="inherit" aria-label="menu">
+          <Link to={'/profile'}>
+            <AccountCircleIcon  />
+            </Link>
+          </IconButton>
       </>);
       
      }
@@ -65,15 +79,12 @@ const [buttons, setButtons] = useState(null);
       <AppBar position="static">
         <Toolbar>
           
-          <IconButton edge="start"  className={classes.menuButton} color="inherit" aria-label="menu">
-          <Link to={'/'}>
-            <AccountCircleIcon  />
-            </Link>
-          </IconButton>
+         
           <Typography variant="h6" className={classes.title}>
             Booking NL
           </Typography>
           <Button  color="inherit" > <Link to={'/'}>Home</Link></Button>
+          <Button  color="inherit" > <Link to={'/chat'}>Chat</Link></Button>
           {buttons} 
 
          

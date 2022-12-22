@@ -38,7 +38,7 @@ export default async function login({ email, password }) {
     sessionStorage.setItem("refreshToken", response.data.refresh_token) 
     sessionStorage.setItem("role", response.data.role)
     window.location.reload();
-  } , toast.success('Weolcome back nigga!') )
+  } )
 
     .catch((err) => {
 

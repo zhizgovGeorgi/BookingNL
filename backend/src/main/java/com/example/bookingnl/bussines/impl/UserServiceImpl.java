@@ -45,12 +45,17 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return repository.findUserByEmail(email);
     }
 
+    @Override
+    public User findById(Long id) {
+        return repository.findUserById(id);
+    }
+
 
     @Override
     public User save(User user) {
 
         if (repository.existsByEmail(user.getEmail())) {
-            log.error("User not found");
+            log.error("Such user already exists!");
             return null;
         }
         log.info("Saving new user {} .", user.getFirstName());
@@ -58,9 +63,5 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return repository.save(user);
 
     }
-
-
-
-
 
 }
