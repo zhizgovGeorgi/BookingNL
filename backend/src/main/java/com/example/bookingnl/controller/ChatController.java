@@ -19,13 +19,14 @@ public class ChatController {
 
     @MessageMapping("/message")
     @SendTo("/chatroom/public")
-    public ChatMessage register(@Payload ChatMessage chatMessage) {
-        return chatMessage;
+    public ChatMessage receiveMessage(@Payload ChatMessage message){
+        return message;
     }
 
     @MessageMapping("/private-message")
-    public ChatMessage registerPrivateMessage(@Payload ChatMessage chatMessage) {
-        template.convertAndSendToUser(chatMessage.getSender(), "/private", chatMessage);
-        return chatMessage;
+    public ChatMessage recMessage(@Payload ChatMessage message){
+        template.convertAndSendToUser(message.getReceiverName(),"/private",message);
+        System.out.println(message.toString());
+        return message;
     }
 }

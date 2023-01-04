@@ -2,7 +2,7 @@ import axios, { AxiosHeaders } from "axios";
 import { toast } from "react-toastify";
 
 
-const reservationURL = 'http://localhost:9091/reservations';
+const reservationURL = 'http://localhost:8080/reservations';
 const jwtToken = window.sessionStorage.getItem('accessToken');
 
 const makeReservation=(reservation)=>{

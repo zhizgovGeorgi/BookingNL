@@ -2,7 +2,7 @@ import axios, { AxiosHeaders } from "axios";
 import { toast } from "react-toastify";
 
 
-const destinationsURL = 'http://localhost:9091/destinations';
+const destinationsURL = 'http://localhost:8080/destinations';
 const jwtToken = window.sessionStorage.getItem('accessToken');
 
 

@@ -2,7 +2,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 
-const userURL = 'http://localhost:9091/api';
+const userURL = 'http://localhost:8080/api';
 const jwtToken = sessionStorage.getItem("accessToken");
 const refreshToken = sessionStorage.getItem("refreshToken");
 

@@ -11,22 +11,22 @@ export default function ChatService() {
     const [publicChats, setPublicChats] = useState([]);
     const [tab,setTab] =useState("CHATROOM");
     const [userData, setUserData] = useState({
-        username: '',
+        username: jwtDecode(sessionStorage.getItem("accessToken")).sub,
         receivername: '',
         connected: false,
         message: ''
     });
     useEffect(() => {
 
-        let username = jwtDecode(sessionStorage.getItem("accessToken")).sub;
-        handleUsername(username)
+        // let username = jwtDecode(sessionStorage.getItem("accessToken")).sub;
+        // handleUsername(username)
         connect();
 
     }, []);
 
     const connect =()=>{
-        let Sock = new SockJS('http://localhost:9091/ws');
-        stompClient = over(Sock);
+        let socket = new SockJS('http://localhost:8080/ws');
+        stompClient = over(socket);
         stompClient.connect({},onConnected, onError);
     }
 
@@ -38,11 +38,11 @@ export default function ChatService() {
     }
 
     const userJoin=()=>{
-        var chatMessage = {
+          var chatMessage = {
             senderName: userData.username,
             status:"JOIN"
-        };
-        stompClient.send("/app/message", {}, JSON.stringify(chatMessage));
+          };
+          stompClient.send("/app/message", {}, JSON.stringify(chatMessage));
     }
 
     const onMessageReceived = (payload)=>{
@@ -60,7 +60,7 @@ export default function ChatService() {
                 break;
         }
     }
-
+    
     const onPrivateMessage = (payload)=>{
         console.log(payload);
         var payloadData = JSON.parse(payload.body);
@@ -75,6 +75,7 @@ export default function ChatService() {
         }
     }
 
+
     const onError = (err) => {
         console.log(err);
     }
@@ -87,11 +88,13 @@ export default function ChatService() {
         if (stompClient) {
             var chatMessage = {
                 senderName: userData.username,
+                receiverName:tab,
                 message: userData.message,
                 status:"MESSAGE"
             };
             console.log(chatMessage);
             stompClient.send("/app/message", {}, JSON.stringify(chatMessage));
+            publicChats.push(chatMessage);
             setUserData({...userData,"message": ""});
         }
     }
@@ -114,9 +117,9 @@ export default function ChatService() {
         }
     }
 
-    const handleUsername=(username)=>{
-        setUserData({...userData,"username": username });
-    }
+    // const handleUsername=(username)=>{
+    //     setUserData({...userData,"username": username });
+    // }
 
     return (
         <div className="container">
@@ -136,6 +139,7 @@ export default function ChatService() {
                                     {chat.senderName !== userData.username && <div className="avatar">{chat.senderName}</div>}
                                     <div className="message-data">{chat.message}</div>
                                     {chat.senderName === userData.username && <div className="avatar self">{chat.senderName}</div>}
+                                    
                                 </li>
                             ))}
                         </ul>
