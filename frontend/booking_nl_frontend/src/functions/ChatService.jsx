@@ -46,8 +46,9 @@ export default function ChatService() {
     }
 
     const onMessageReceived = (payload)=>{
+        console.log(payload);
         var payloadData = JSON.parse(payload.body);
-        switch(payloadData.status){
+        switch(payload.command){
             case "JOIN":
                 if(!privateChats.get(payloadData.senderName)){
                     privateChats.set(payloadData.senderName,[]);
@@ -55,6 +56,9 @@ export default function ChatService() {
                 }
                 break;
             case "MESSAGE":
+                if(payloadData.message === null){
+                    setUserData(prevState => ({...prevState, message: ""}))
+                }
                 publicChats.push(payloadData);
                 setPublicChats([...publicChats]);
                 break;
@@ -92,7 +96,6 @@ export default function ChatService() {
                 message: userData.message,
                 status:"MESSAGE"
             };
-            console.log(chatMessage);
             stompClient.send("/app/message", {}, JSON.stringify(chatMessage));
             publicChats.push(chatMessage);
             setUserData({...userData,"message": ""});

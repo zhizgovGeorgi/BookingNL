@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import CreateDesination from "./CreateDestination";
 import React from 'react';
 import '../customcss/SingleDestination.css';
+import jwtDecode from "jwt-decode";
 
 
 
@@ -16,9 +17,12 @@ export default function SingleDestination() {
     const navigate = useNavigate();
     const [destination, setDestination] = useState(null);
     const [buttons, setButtons] = useState(null);
+    const email = jwtDecode(sessionStorage.getItem("accessToken")).sub;
+
 
     const deleteDestination = async()=>{
-        DestinationService.deleteDestination(id);
+      console.log(email)
+        DestinationService.deleteDestination(id, email);
        navigate("/");
       }
 

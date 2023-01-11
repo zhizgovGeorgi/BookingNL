@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 
 public class CreateDestinationRequest {
+    private String email;
     private String name;
     private String location;
     private double pricePerNight;

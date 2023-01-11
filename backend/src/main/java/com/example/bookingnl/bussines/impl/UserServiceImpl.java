@@ -2,6 +2,7 @@ package com.example.bookingnl.bussines.impl;
 
 import com.example.bookingnl.bussines.UserService;
 import com.example.bookingnl.domain.User;
+import com.example.bookingnl.exceptions.DuplicationException;
 import com.example.bookingnl.persistence.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -52,16 +53,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 
     @Override
-    public User save(User user) {
+    public User save(User user) throws DuplicationException {
 
         if (repository.existsByEmail(user.getEmail())) {
-            log.error("Such user already exists!");
-            return null;
+         throw  new DuplicationException();
         }
-        log.info("Saving new user {} .", user.getFirstName());
         user.setPassword(encoder.encode(user.getPassword()));
         return repository.save(user);
-
     }
 
 }

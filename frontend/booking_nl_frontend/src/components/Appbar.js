@@ -41,6 +41,7 @@ const [buttons, setButtons] = useState(null);
     if (role === "[Admin]" ) {
      setButtons(<>
      <Button  color="white" > <Link to={'/createDestinations'}>Create Destinations</Link></Button>
+     <Button  color="inherit" > <Link to={'/chat'}>Chat</Link></Button>
      <Button onClick={UserService.logout} color="inherit" > <Link to={'/'}>Log Out</Link></Button>
      <IconButton edge="start"  className={classes.menuButton} color="inherit" aria-label="menu">
           <Link to={'/profile'}>
@@ -53,6 +54,7 @@ const [buttons, setButtons] = useState(null);
     else if (role === "[Customer]" ) {
       setButtons(<>
        <Button color="white" > <Link to={'/makeReservation'}>Make Reservation</Link></Button>
+       <Button  color="inherit" > <Link to={'/chat'}>Chat</Link></Button>
       <Button onClick={UserService.logout} color="inherit" > <Link to={'/'}>Log Out</Link></Button>
       <IconButton edge="start"  className={classes.menuButton} color="inherit" aria-label="menu">
           <Link to={'/profile'}>
@@ -84,7 +86,7 @@ const [buttons, setButtons] = useState(null);
             Booking NL
           </Typography>
           <Button  color="inherit" > <Link to={'/'}>Home</Link></Button>
-          <Button  color="inherit" > <Link to={'/chat'}>Chat</Link></Button>
+          
           {buttons} 
 
          

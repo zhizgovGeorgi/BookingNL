@@ -41,9 +41,7 @@ class ReservationServiceImplTest {
     @Autowired
     private ReservationServiceImpl reservationServiceImpl;
 
-    /**
-     * Method under test: {@link ReservationServiceImpl#saveReservation(Reservation)}
-     */
+
     @Test
     @Disabled("TODO: Complete this test")
     void testSaveReservation() throws Exception {
@@ -83,9 +81,7 @@ class ReservationServiceImplTest {
         reservationServiceImpl.saveReservation(reservation);
     }
 
-    /**
-     * Method under test: {@link ReservationServiceImpl#saveReservation(Reservation)}
-     */
+
     @Test
     void testSaveReservation2() throws Exception {
         Destination destination = new Destination();
@@ -170,9 +166,7 @@ class ReservationServiceImplTest {
         verify(reservation1).setUser((User) any());
     }
 
-    /**
-     * Method under test: {@link ReservationServiceImpl#findAllReservationsByUserId(Long)}
-     */
+
     @Test
     void testFindAllReservationsByUserId() {
         ArrayList<Reservation> reservationList = new ArrayList<>();

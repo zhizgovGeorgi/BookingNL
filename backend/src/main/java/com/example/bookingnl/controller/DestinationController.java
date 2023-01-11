@@ -3,6 +3,7 @@ package com.example.bookingnl.controller;
 import com.example.bookingnl.bussines.DestinationService;
 import com.example.bookingnl.converter.DestinationConverter;
 import com.example.bookingnl.domain.*;
+import com.example.bookingnl.exceptions.UnauthorizedException;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -46,6 +47,8 @@ public class DestinationController {
         try {
             service.deleteDestinationById(id);
             return "Successful deletion";
+        }catch (UnauthorizedException e){
+            return e.getMessage();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

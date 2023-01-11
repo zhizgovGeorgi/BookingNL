@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Home } from './Home';
 import {useNavigate} from 'react-router-dom';
 import { toast } from 'react-toastify';
+import jwtDecode from 'jwt-decode';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -37,13 +38,14 @@ const useStyles = makeStyles((theme) => ({
     const [location, setLocation]=useState('');
     const [pricePerNight, setPricePerNight]=useState('');
       const classes = useStyles();
+      const email = jwtDecode(sessionStorage.getItem("accessToken")).sub;
       
       
   
       
     
    const saveDestination = async () =>{
-    const destination={name, location, pricePerNight}
+    const destination={email, name, location, pricePerNight}
     DestinationService.saveDestination({destination}).then(res=>{
       navigate('/') 
     })

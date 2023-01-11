@@ -2,7 +2,12 @@ package com.example.bookingnl.bussines.impl;
 
 import com.example.bookingnl.bussines.DestinationService;
 import com.example.bookingnl.domain.Destination;
+import com.example.bookingnl.domain.User;
+import com.example.bookingnl.exceptions.DuplicationException;
+import com.example.bookingnl.exceptions.InvalidData;
+import com.example.bookingnl.exceptions.UnauthorizedException;
 import com.example.bookingnl.persistence.DestinationRepository;
+import com.example.bookingnl.persistence.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,14 +25,14 @@ public class DestinationServiceImpl implements DestinationService {
     }
 
     @Override
-    public Destination saveDestination(Destination destination) {
+    public Destination saveDestination(Destination destination) throws DuplicationException {
+
         if (repository.findByNameAndLocation(destination.getName(), destination.getLocation()).isEmpty()) {
 
             return repository.save(destination);
         }
-        return null;
+        throw new DuplicationException();
     }
-
 
 
     @Override
@@ -37,10 +42,10 @@ public class DestinationServiceImpl implements DestinationService {
 
     @Override
     public void deleteDestinationById(Long id) throws Exception {
+//
         if (repository.findById(id) != null) {
             repository.deleteDestinationById(id);
-        }
-        else {
+        } else {
             throw new Exception("You have not selected a destination to be deleted!");
         }
     }

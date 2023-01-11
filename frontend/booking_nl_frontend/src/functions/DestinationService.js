@@ -40,8 +40,8 @@ const saveDestination = (destination) => {
 }
 
 
-const deleteDestination = (id) => {
-    return axios.delete(`${destinationsURL}/${id}`, {
+const deleteDestination = (id, email) => {
+    return axios.delete(`${destinationsURL}/${id}`, {data:email}, {
         headers:{
             'Authorization':"Bearer " + jwtToken
         }

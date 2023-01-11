@@ -40,9 +40,7 @@ class UserServiceImplTest {
     @Autowired
     private UserServiceImpl userServiceImpl;
 
-    /**
-     * Method under test: {@link UserServiceImpl#loadUserByUsername(String)}
-     */
+
     @Test
     void testLoadUserByUsername() throws UsernameNotFoundException {
         User user = new User();
@@ -66,9 +64,7 @@ class UserServiceImplTest {
         verify(userRepository).findByEmail((String) any());
     }
 
-    /**
-     * Method under test: {@link UserServiceImpl#loadUserByUsername(String)}
-     */
+
     @Test
     void testLoadUserByUsername2() throws UsernameNotFoundException {
         User user = new User(123L, "jane.doe@example.org", "Jane", "Doe", "iloveyou", "User with email {} found",
@@ -93,9 +89,7 @@ class UserServiceImplTest {
         verify(userRepository).findByEmail((String) any());
     }
 
-    /**
-     * Method under test: {@link UserServiceImpl#loadUserByUsername(String)}
-     */
+
     @Test
     void testLoadUserByUsername3() throws UsernameNotFoundException {
         User user = mock(User.class);
@@ -131,9 +125,7 @@ class UserServiceImplTest {
         verify(user).setRole((String) any());
     }
 
-    /**
-     * Method under test: {@link UserServiceImpl#loadUserByUsername(String)}
-     */
+
     @Test
     @Disabled("TODO: Complete this test")
     void testLoadUserByUsername4() throws UsernameNotFoundException {
@@ -168,9 +160,7 @@ class UserServiceImplTest {
         userServiceImpl.loadUserByUsername("janedoe");
     }
 
-    /**
-     * Method under test: {@link UserServiceImpl#loadUserByUsername(String)}
-     */
+
     @Test
     @Disabled("TODO: Complete this test")
     void testLoadUserByUsername5() throws UsernameNotFoundException {
@@ -205,9 +195,7 @@ class UserServiceImplTest {
         userServiceImpl.loadUserByUsername("janedoe");
     }
 
-    /**
-     * Method under test: {@link UserServiceImpl#loadUserByUsername(String)}
-     */
+
     @Test
     void testLoadUserByUsername6() throws UsernameNotFoundException {
         when(userRepository.findByEmail((String) any())).thenReturn(Optional.empty());
@@ -240,9 +228,7 @@ class UserServiceImplTest {
         verify(user).setRole((String) any());
     }
 
-    /**
-     * Method under test: {@link UserServiceImpl#findByEmail(String)}
-     */
+
     @Test
     void testFindByEmail() {
         User user = new User();
@@ -258,9 +244,6 @@ class UserServiceImplTest {
         verify(userRepository).findUserByEmail((String) any());
     }
 
-    /**
-     * Method under test: {@link UserServiceImpl#findByEmail(String)}
-     */
     @Test
     void testFindByEmail2() {
         when(userRepository.findUserByEmail((String) any())).thenThrow(new UsernameNotFoundException("Msg"));
@@ -268,9 +251,7 @@ class UserServiceImplTest {
         verify(userRepository).findUserByEmail((String) any());
     }
 
-    /**
-     * Method under test: {@link UserServiceImpl#findById(Long)}
-     */
+
     @Test
     void testFindById() {
         User user = new User();
@@ -286,9 +267,7 @@ class UserServiceImplTest {
         verify(userRepository).findUserById((Long) any());
     }
 
-    /**
-     * Method under test: {@link UserServiceImpl#findById(Long)}
-     */
+
     @Test
     void testFindById2() {
         when(userRepository.findUserById((Long) any())).thenThrow(new UsernameNotFoundException("Msg"));
@@ -296,9 +275,7 @@ class UserServiceImplTest {
         verify(userRepository).findUserById((Long) any());
     }
 
-    /**
-     * Method under test: {@link UserServiceImpl#save(User)}
-     */
+
     @Test
     void testSave() {
         User user = new User();
@@ -324,9 +301,7 @@ class UserServiceImplTest {
         verify(userRepository).existsByEmail((String) any());
     }
 
-    /**
-     * Method under test: {@link UserServiceImpl#save(User)}
-     */
+
     @Test
     void testSave2() {
         User user = new User();
@@ -356,9 +331,7 @@ class UserServiceImplTest {
         assertEquals("secret", user1.getPassword());
     }
 
-    /**
-     * Method under test: {@link UserServiceImpl#save(User)}
-     */
+
     @Test
     void testSave3() {
         User user = new User();
