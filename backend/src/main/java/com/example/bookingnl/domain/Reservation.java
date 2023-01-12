@@ -1,5 +1,6 @@
 package com.example.bookingnl.domain;
 
+import com.example.bookingnl.exceptions.InvalidData;
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,7 +24,9 @@ public class Reservation {
     @JoinColumn(name = "destinationId", referencedColumnName = "id")
     private Destination destination;
     @Setter(AccessLevel.NONE)
+    @NotNull
     private Date startDate;
+    @NotNull
     private Date endDate;
     @NotNull
 
@@ -36,7 +39,7 @@ public class Reservation {
             this.startDate = startDate;
         }
         else{
-            throw new Exception("Start cannot be before end date");
+            throw new InvalidData();
         }
     }
 }
