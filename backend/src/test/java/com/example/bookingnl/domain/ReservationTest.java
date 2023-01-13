@@ -21,7 +21,7 @@ class ReservationTest {
 
     @Test
     void reservationConstructor() throws Exception {
-//
+
 //        Destination actualDestination = new Destination();
 //        actualDestination.setName("Pakistan");
 //        actualDestination.setLocation("Pakistan1");
@@ -43,23 +43,21 @@ class ReservationTest {
 //        actualReservation.setUser(actualUser);
 //        actualReservation.setId(123L);
 //        actualReservation.setTotalPrice(100);
-//        actualReservation.setStartDate(2201, 1,1);
-//        actualReservation.setEndDate();
-//        assertEquals("Adress", actualReservation.getAdress());
-//        assertEquals("jane.doe@example.org", actualReservation.getEmail());
-//        assertEquals("Jane", actualReservation.getFirstName());
+//        actualReservation.setStartDate(2201-1-1);
+//        actualReservation.setEndDate(20-01-2001);
 //        assertEquals(123L, actualReservation.getId().longValue());
-//        assertEquals("Doe", actualReservation.getLastName());
-//        assertEquals("1234", actualReservation.getPassword());
-//        assertEquals("Role", actualReservation.getRole());
     }
 
+    //happy flow
     @Test
     void testSetStartDate() throws Exception {
+        //arrange
         Reservation reservation = new Reservation();
         java.sql.Date date = mock(java.sql.Date.class);
+        //act
         when(date.compareTo((java.util.Date) any())).thenReturn(1);
         reservation.setStartDate(date);
+        //assert
         verify(date).compareTo((java.util.Date) any());
     }
 }

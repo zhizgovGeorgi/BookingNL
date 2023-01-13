@@ -15,6 +15,13 @@ import SingleDestination from './SingleDestination';
 
 export  function ShowAllDestinations  ()  {
    const [destinations, setDestinations] = useState([]);
+   const [searchedDestination, setSearchedDestinations] = useState('');
+
+function handleSearch(e){
+  setSearchedDestinations(e.target.value);
+}
+   const searchDestination=destinations.filter((destination) =>
+   destination.name.toLowerCase().includes(searchedDestination.toLowerCase()))
 
    useEffect(()=>{
     DestinationService.getAllDestinations().then(res => setDestinations(res.data));
@@ -42,8 +49,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));   
  return ( 
+  
     <div  className="singleDestination">
-  {destinations.map((destination) => (
+      <input
+  type="text"
+  placeholder="Search by destination name"
+  onChange={handleSearch}/>
+  {searchDestination.map((destination) => (
     <div key={destination.id}> 
        <div >
       <Paper>

@@ -30,7 +30,7 @@ const makeReservation=(reservation)=>{
 
 const getReservations=(userId)=>{
     try {
-        return  axios.get(`${destinationsURL}`, userId.userId,{
+        return  axios.get(`${reservationURL}`, userId.userId,{
             headers:{
                 'Authorization': "Bearer " + jwtToken
             }
@@ -38,4 +38,8 @@ const getReservations=(userId)=>{
   } catch (error) {
       console.log('Error with idk', error);
   }
+}
+export default  {
+    makeReservation,
+    getReservations
 }

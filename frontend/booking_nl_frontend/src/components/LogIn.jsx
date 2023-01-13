@@ -53,15 +53,15 @@ export default function LogIn() {
         <Paper elevation={3} style={paperStyle}>
             <h1 style={{color:"blue"}}><u>Log in</u></h1>
     <form className={classes.root} noValidate autoComplete="off">
-      <TextField id="outlined-basic" label="Email" variant="outlined" fullWidth
+      <TextField name='email' id="outlined-basic" label="Email" variant="outlined" fullWidth
       value={email}
       onChange={(e)=>setEmail(e.target.value)}
       />
-      <TextField required type={"password"} id="outlined-basic" label="Password" variant="outlined" fullWidth
+      <TextField name='password' required type={"password"} id="outlined-basic" label="Password" variant="outlined" fullWidth
       value={password}
       onChange={(e)=>setPassword(e.target.value)}
        />
-       <Button variant="contained" color="secondary" onClick={logIn}>
+       <Button name='logInButton' variant="contained" color="secondary" onClick={logIn}>
  Log In
 </Button>
     </form>

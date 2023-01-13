@@ -8,6 +8,8 @@ import CreateDesination from "./CreateDestination";
 import React from 'react';
 import '../customcss/SingleDestination.css';
 import jwtDecode from "jwt-decode";
+import { Link } from 'react-router-dom';
+
 
 
 
@@ -38,6 +40,11 @@ export default function SingleDestination() {
      </>);
      
     }
+    else if (role === "[Customer]" ) {
+      setButtons(<>
+<Button  color="inherit" > <Link to={'/makeReservation'}>Make a reservation</Link></Button>      </>);
+      
+     }
   },[])
 
   useEffect(() => {

@@ -58,15 +58,15 @@ const useStyles = makeStyles((theme) => ({
           <Paper elevation={3} style={paperStyle}>
               <h1 style={{color:"blue"}}><u>Create new destination</u></h1>
       <form className={classes.root} noValidate autoComplete="off">
-      <TextField id="outlined-basic" label="Name" variant="outlined" fullWidth
+      <TextField name='locationName'id="outlined-basic" label="Name" variant="outlined" fullWidth
         value={name}
         onChange={(e)=>setName(e.target.value)}
         />
-         <TextField id="outlined-basic" label="Location" variant="outlined" fullWidth
+         <TextField name='location'id="outlined-basic" label="Location" variant="outlined" fullWidth
         value={location}
         onChange={(e)=>setLocation(e.target.value)}
         />
-         <TextField id="outlined-basic" label="Price per night" variant="outlined" fullWidth
+         <TextField name='pricePerNight'id="outlined-basic" label="Price per night" variant="outlined" fullWidth
         value={pricePerNight}
         onChange={(e)=>setPricePerNight(e.target.value)}
         />

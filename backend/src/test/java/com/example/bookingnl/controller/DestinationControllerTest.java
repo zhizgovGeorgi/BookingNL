@@ -42,9 +42,8 @@ class DestinationControllerTest {
 
     @MockBean
     private DestinationService destinationService;
-//    @MockBean
-//    private UserService userService;
-//happy flow
+
+    //happy flow
     @Test
     void getDestinations_should_return_list_of_dest() throws Exception {
         //arrange
@@ -57,7 +56,7 @@ class DestinationControllerTest {
         MockMvcBuilders.standaloneSetup(destinationController)
                 .build()
                 .perform(requestBuilder)
-        //assert
+                //assert
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType("application/json"))
                 .andExpect(MockMvcResultMatchers.content().string(content));
@@ -109,14 +108,14 @@ class DestinationControllerTest {
 ////                    .andExpect(MockMvcResultMatchers.status().isOk())
 //                    .andExpect(MockMvcResultMatchers.content().contentType("application/json"))
 //                    .andExpect(MockMvcResultMatchers.content().string(expected));
-        }
+    }
 
 
-//happy flow
+    //happy flow
     @Test
     void getDestination() throws Exception {
         //arrange
-       Destination destination = Destination.builder().id(1L).build();
+        Destination destination = Destination.builder().id(1L).build();
         when(destinationService.findById(any(Long.class))).thenReturn(Optional.ofNullable(destination));
 
         //act
@@ -150,19 +149,18 @@ class DestinationControllerTest {
                 .andExpect(MockMvcResultMatchers.content().string(content));
     }
 
-//happy flow
+    //happy flow
     @Test
     void deleteDestination() throws Exception {
         //arrange
         String content = (new ObjectMapper()).writeValueAsString("ga@abv.bg");
-//        when(userService.findByEmail(any(String.class))).then((Answer<?>) User.builder().role("Admin").build());
         when(destinationService.findById(any(Long.class))).thenReturn(Optional.ofNullable(Destination.builder().build()));
 
         //act
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.delete("/destinations/{id}", 1L)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(content);
-
+        //assert
         MockMvcBuilders.standaloneSetup(destinationController)
                 .build()
                 .perform(requestBuilder)

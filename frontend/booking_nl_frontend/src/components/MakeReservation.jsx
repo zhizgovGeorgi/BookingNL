@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Home } from './Home';
 import {useNavigate} from 'react-router-dom';
 import { toast } from 'react-toastify';
+import ReservationService from '../functions/ReservationService'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -33,8 +34,13 @@ export default function MakeReservation(){
     const[startDate, setStartDate]=useState('');
     const[endDate, setEndDate]=useState('');
     const classes = useStyles();
+    const navigate = useNavigate();
 
-
+    const makeReservation = async () =>{
+      const reservation={startDate, endDate, guests}
+      ReservationService.makeReservation({reservation}).then(res=>{
+        navigate('/') 
+      })}
     return (
       
         <Container>
@@ -60,7 +66,7 @@ export default function MakeReservation(){
           onChange={(e)=>setGuests(e.target.value)}
           />
           
-           <Button variant="contained" color="secondary" >
+           <Button onClick={makeReservation} variant="contained" color="secondary" >
      Make reservation
     </Button>
         </form>

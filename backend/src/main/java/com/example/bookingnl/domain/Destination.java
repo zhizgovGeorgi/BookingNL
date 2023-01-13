@@ -1,5 +1,6 @@
 package com.example.bookingnl.domain;
 
+import com.example.bookingnl.exceptions.InvalidData;
 import lombok.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,12 +28,12 @@ public class Destination {
     @Setter(AccessLevel.NONE)
     private double pricePerNight;
 
-    public void setPricePerNight(double pricePerNight) throws Exception {
+    public void setPricePerNight(double pricePerNight) throws InvalidData {
         if(pricePerNight>0){
             this.pricePerNight = pricePerNight;
         }
         else {
-            throw new Exception("Price cannot 0 or less");
+            throw new InvalidData();
         }
     }
 }
