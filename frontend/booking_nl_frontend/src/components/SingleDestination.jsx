@@ -19,10 +19,21 @@ export default function SingleDestination() {
     const navigate = useNavigate();
     const [destination, setDestination] = useState(null);
     const [buttons, setButtons] = useState(null);
-    const email = jwtDecode(sessionStorage.getItem("accessToken")).sub;
+    let currentDate = new Date();
+    let cDay = currentDate.getDate();
+    let cMonth = currentDate.getMonth() + 1;
+    let cYear = currentDate.getFullYear();
+    let dateOfVisit= (cDay + "/" + cMonth + "/" + cYear);
+      
+    const [visit, setVisit] = useState({
+      id: 0,
+      destinationId: id,
+      dateOfVisit: dateOfVisit
+  })
 
 
     const deleteDestination = async()=>{
+      const email = jwtDecode(sessionStorage.getItem("accessToken")).sub;
       console.log(email)
         DestinationService.deleteDestination(id, email);
        navigate("/");
@@ -30,19 +41,24 @@ export default function SingleDestination() {
 
       const getDestination = () =>
         DestinationService.getDestination(id)
-      
+
+
+        const visitDestination = () =>{
+        DestinationService.visitDestination(visit).then(res=>{
+        })}
 
   useEffect(()=>{
     const role = sessionStorage.getItem("role");
+    
     if (role === "[Admin]" ) {
      setButtons(<>
-     <Button onClick={deleteDestination} color="white" > Delete destination</Button>
+     <Button id="deleteButon" onClick={deleteDestination} color="white" > Delete destination</Button>
      </>);
      
     }
     else if (role === "[Customer]" ) {
       setButtons(<>
-<Button  color="inherit" > <Link to={'/makeReservation'}>Make a reservation</Link></Button>      </>);
+<Button  color="inherit" > <Link to={`/makeReservation/${id}`}>Make a reservation</Link></Button>      </>);
       
      }
   },[])
@@ -51,7 +67,9 @@ export default function SingleDestination() {
     getDestination().then(res => {
       setDestination(res.data);
     })
-  }, []);
+    visitDestination();
+  }, []); 
+
 
  
 

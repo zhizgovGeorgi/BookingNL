@@ -4,14 +4,24 @@ import com.example.bookingnl.bussines.DestinationService;
 import com.example.bookingnl.bussines.UserService;
 import com.example.bookingnl.domain.Destination;
 import com.example.bookingnl.domain.User;
+import com.example.bookingnl.domain.Visit;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
+
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.stubbing.Answer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
 import java.util.*;
@@ -33,7 +43,10 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.when;
 
+@ExtendWith(SpringExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
 class DestinationControllerTest {
@@ -60,6 +73,34 @@ class DestinationControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType("application/json"))
                 .andExpect(MockMvcResultMatchers.content().string(content));
+    }
+
+
+    @Test
+    void testSaveVisit() throws Exception {
+//        Visit visit = new Visit();
+//        LocalDateTime atStartOfDayResult = LocalDate.of(1970, 1, 1).atStartOfDay();
+//        visit.setDateOfVisit(Date.from(atStartOfDayResult.atZone(ZoneId.of("UTC")).toInstant()));
+//        visit.setDestinationId(123L);
+//        visit.setId(123);
+//        when(destinationService.saveVisit((Visit) any())).thenReturn(visit);
+//
+//        Visit visit1 = new Visit();
+//        LocalDateTime atStartOfDayResult1 = LocalDate.of(1970, 1, 1).atStartOfDay();
+//        visit1.setDateOfVisit(Date.from(atStartOfDayResult1.atZone(ZoneId.of("UTC")).toInstant()));
+//        visit1.setDestinationId(123L);
+//        visit1.setId(123);
+//        String content = (new ObjectMapper()).writeValueAsString(visit1);
+//        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.post("/destinations/visit")
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .content(content);
+//        ResultActions actualPerformResult = MockMvcBuilders.standaloneSetup(destinationController)
+//                .build()
+//                .perform(requestBuilder);
+//        actualPerformResult.andExpect(MockMvcResultMatchers.status().isCreated())
+//                .andExpect(MockMvcResultMatchers.content().contentType("application/json"))
+//                .andExpect(MockMvcResultMatchers.content().string("{\"id\":123,\"destinationId\":123,\"dateOfVisit\":0}"))
+//                .andExpect(MockMvcResultMatchers.redirectedUrl("http://localhost/destinations"));
     }
 
     //unhappy flow

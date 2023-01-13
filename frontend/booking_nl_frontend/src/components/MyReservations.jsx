@@ -11,25 +11,17 @@ import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import {useNavigate} from 'react-router-dom';
 import SingleDestination from './SingleDestination';
+import ReservationService from '../functions/ReservationService';
 
 
 
-export  function ShowAllDestinations  ()  {
-   const [destinations, setDestinations] = useState([]);
-   const [searchedDestination, setSearchedDestinations] = useState('');
+export  function MyReservations  ()  {
+   const [reservations, setReservations] = useState([]);
   
    
-function handleSearch(e){
-  setSearchedDestinations(e.target.value);
-}
-
-
-
-   const searchDestination=destinations.filter((destination) =>
-   destination.name.toLowerCase().includes(searchedDestination.toLowerCase()))
 
    useEffect(()=>{
-    DestinationService.getAllDestinations().then(res => setDestinations(res.data));
+    ReservationService.getReservations().then(res => setReservations(res.data));
    },[])
 
    //const navigate = useNavigate();
@@ -59,9 +51,9 @@ const useStyles = makeStyles((theme) => ({
       <input
   type="text"
   placeholder="Search by destination name"
-  onChange={handleSearch}/>
-  {searchDestination.map((destination) => (
-    <div key={destination.id}> 
+  />
+  {reservations.map((reservation) => (
+    <div key={reservation.id}> 
        <div >
       <Paper>
         <Grid container spacing={2}>
@@ -74,24 +66,24 @@ const useStyles = makeStyles((theme) => ({
             <Grid item xs container direction="column" spacing={2}>
               <Grid item xs>
                 <Typography gutterBottom variant="subtitle1">
-                 {destination.name}
+                 {reservation.startDate}
                 </Typography>
                 <Typography variant="body2" gutterBottom>
-                  {destination.location}
+                  {reservation.endDate}
                 </Typography>
                 <Typography variant="body2" color="textSecondary">
-                  {destination.id}
+                  {reservation.guests}
                 </Typography>
               </Grid>
               <Grid item>
                 {/* <Typography  variant="body2" style={{ cursor: 'pointer' }}>
                   Remove
                 </Typography> */}
-                <Button   color="white" > <Link to={`/singleDestination/${destination.id}`}>Show</Link></Button>
+                {/* <Button   color="white" > <Link to={`/singleDestination/${destination.id}`}>Show</Link></Button> */}
               </Grid>
             </Grid>
             <Grid item>
-              <Typography variant="subtitle1">{destination.price}</Typography>
+              {/* <Typography variant="subtitle1">{destination.price}</Typography> */}
             </Grid>
           </Grid>
         </Grid>
@@ -105,7 +97,3 @@ const useStyles = makeStyles((theme) => ({
 
 
   }
-
-
-    
-

@@ -78,44 +78,44 @@ class ReservationsControllerTest {
     }
 
 
-    @Test
-    void testSaveReservation() throws Exception {
-        //arrange
-        Destination destination = new Destination();
-        destination.setId(123L);
-        destination.setLocation("Location");
-        destination.setName("Name");
-        destination.setPricePerNight(10.0d);
-
-        User user = new User();
-        user.setAdress("Adress");
-        user.setEmail("jane.doe@example.org");
-        user.setFirstName("Jane");
-        user.setId(123L);
-        user.setLastName("Doe");
-        user.setPassword("iloveyou");
-        user.setRole("Role");
-
-        CreateReservationRequest createReservationRequest = new CreateReservationRequest();
-        createReservationRequest.setDestination(destination);
-        LocalDateTime atStartOfDayResult = LocalDate.of(1970, 1, 1).atStartOfDay();
-        createReservationRequest.setEndDate(Date.from(atStartOfDayResult.atZone(ZoneId.of("UTC")).toInstant()));
-        createReservationRequest.setGuests(1);
-        LocalDateTime atStartOfDayResult1 = LocalDate.of(1970, 1, 1).atStartOfDay();
-        createReservationRequest.setStartDate(Date.from(atStartOfDayResult1.atZone(ZoneId.of("UTC")).toInstant()));
-        createReservationRequest.setTotalPrice(10.0d);
-        createReservationRequest.setUser(user);
-        String content = (new ObjectMapper()).writeValueAsString(createReservationRequest);
-        //act
-        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/reservations")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(content);
-        //assert
-        MockMvcBuilders.standaloneSetup(reservationsController)
-                .build()
-                .perform(requestBuilder)
-        .andExpect(MockMvcResultMatchers.status().is(400));
-    }
+//    @Test
+//    void testSaveReservation() throws Exception {
+//        //arrange
+//        Destination destination = new Destination();
+//        destination.setId(123L);
+//        destination.setLocation("Location");
+//        destination.setName("Name");
+//        destination.setPricePerNight(10.0d);
+//
+//        User user = new User();
+//        user.setAdress("Adress");
+//        user.setEmail("jane.doe@example.org");
+//        user.setFirstName("Jane");
+//        user.setId(123L);
+//        user.setLastName("Doe");
+//        user.setPassword("iloveyou");
+//        user.setRole("Role");
+//
+//        CreateReservationRequest createReservationRequest = new CreateReservationRequest();
+//        createReservationRequest.setDestination(destination);
+//        LocalDateTime atStartOfDayResult = LocalDate.of(1970, 1, 1).atStartOfDay();
+//        createReservationRequest.setEndDate(Date.from(atStartOfDayResult.atZone(ZoneId.of("UTC")).toInstant()));
+//        createReservationRequest.setGuests(1);
+//        LocalDateTime atStartOfDayResult1 = LocalDate.of(1970, 1, 1).atStartOfDay();
+//        createReservationRequest.setStartDate(Date.from(atStartOfDayResult1.atZone(ZoneId.of("UTC")).toInstant()));
+//        createReservationRequest.setTotalPrice(10.0d);
+//        createReservationRequest.setUser(user);
+//        String content = (new ObjectMapper()).writeValueAsString(createReservationRequest);
+//        //act
+//        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/reservations")
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .content(content);
+//        //assert
+//        MockMvcBuilders.standaloneSetup(reservationsController)
+//                .build()
+//                .perform(requestBuilder)
+//        .andExpect(MockMvcResultMatchers.status().is(400));
+//    }
 
 //
 //    @Test

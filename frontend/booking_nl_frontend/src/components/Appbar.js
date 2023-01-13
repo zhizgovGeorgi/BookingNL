@@ -40,7 +40,7 @@ const [buttons, setButtons] = useState(null);
 
     if (role === "[Admin]" ) {
      setButtons(<>
-     <Button name='createDest'  color="white" > <Link to={'/createDestinations'}>Create Destinations</Link></Button>
+     <Button name='createDest' id='createDest' color="white" > <Link to={'/createDestinations'}>Create Destinations</Link></Button>
      <Button  color="inherit" > <Link to={'/chat'}>Chat</Link></Button>
      <Button onClick={UserService.logout} color="inherit" > <Link to={'/'}>Log Out</Link></Button>
      <IconButton edge="start"  className={classes.menuButton} color="inherit" aria-label="menu">
@@ -53,10 +53,10 @@ const [buttons, setButtons] = useState(null);
     }
     else if (role === "[Customer]" ) {
       setButtons(<>
-       <Button color="white" > <Link to={'/makeReservation'}>Make Reservation</Link></Button>
+       
        <Button  color="inherit" > <Link to={'/chat'}>Chat</Link></Button>
       <Button onClick={UserService.logout} color="inherit" > <Link to={'/'}>Log Out</Link></Button>
-      <IconButton edge="start"  className={classes.menuButton} color="inherit" aria-label="menu">
+      <IconButton id='profiles' edge="start"  className={classes.menuButton} color="inherit" aria-label="menu">
           <Link to={'/profile'}>
             <AccountCircleIcon  />
             </Link>

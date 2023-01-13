@@ -3,13 +3,14 @@ import React, {useEffect, useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import { Container, Paper, Button } from '@material-ui/core';
-import DestinationService from '../functions/DestinationService';
-import axios from 'axios';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Home } from './Home';
 import {useNavigate} from 'react-router-dom';
 import { toast } from 'react-toastify';
-import ReservationService from '../functions/ReservationService'
+import ReservationService from '../functions/ReservationService';
+import DestinationService from '../functions/DestinationService';
+import UserService from '../functions/UserService';
+import jwtDecode from 'jwt-decode';
+import { useParams } from "react-router-dom";
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -19,28 +20,43 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-  // useEffect(()=>{
-  //     const role = sessionStorage.getItem("role");
-  //     if (role !== "[Admin]") {
-  //      navigate("/");
-  
-  //     }
-  // },[])
+
   
 export default function MakeReservation(){
     const paperStyle = {padding: '50px 20px', width:600, margin:"20px auto "}
-
+    const {id}= useParams();
     const[guests, setGuests]=useState('');
     const[startDate, setStartDate]=useState('');
     const[endDate, setEndDate]=useState('');
+    const[user, setUser]=useState('');
+
     const classes = useStyles();
     const navigate = useNavigate();
+    const email = jwtDecode(sessionStorage.getItem("accessToken")).sub;
+
+    //const user = UserService.getUser(jwtDecode(sessionStorage.getItem("accesstoken")).sub);
 
     const makeReservation = async () =>{
-      const reservation={startDate, endDate, guests}
+      const totalPrice=guests;
+      const reservation={id,  startDate, endDate, guests, totalPrice}
       ReservationService.makeReservation({reservation}).then(res=>{
-        navigate('/') 
+        navigate("/")
       })}
+
+
+      useEffect(()=>{
+        //setUser(UserService.getUser(jwtDecode(sessionStorage.getItem("accesstoken")).sub));
+        UserService.getUser().then(res => {
+          console.log(res.data);
+          setUser(res.data)
+          
+        })
+        const role = sessionStorage.getItem("role");
+        if (role === "[Admin]") {
+         navigate("/");
+    
+        }
+    },[])
     return (
       
         <Container>

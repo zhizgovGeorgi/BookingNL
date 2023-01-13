@@ -55,9 +55,26 @@ window.location.reload();
 const getDestination = (id) =>{
     return axios.get(`${destinationsURL}/${id}`)
 }
+
+const visitDestination = (visit) => {
+    
+     return axios.post(`${destinationsURL}/visit`, visit).then(response=>{
+        console.log(visit);
+     })
+     ;}
+
+     const getTopVisits = async () => {
+        try {
+              return await axios.get(`${destinationsURL}/statistics`);
+        } catch (error) {
+            console.log('Error with idk', error);
+        }
+    }
 export default  {
     getAllDestinations,
     deleteDestination,
     saveDestination,
-    getDestination
+    getDestination,
+    visitDestination,
+    getTopVisits
 }

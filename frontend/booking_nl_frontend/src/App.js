@@ -12,6 +12,7 @@ import MakeReservation from './components/MakeReservation';
 import Profile from './components/Profile.jsx';
 import Chat from './components/Chat';
 import ChatService from './functions/ChatService';
+import { MyReservations } from './components/MyReservations';
 
 function App() {
   return (
@@ -38,8 +39,9 @@ theme="dark"
           <Route path='/register' element={ <Register/>} />
           <Route path={`/singleDestination/:id`} element={ <SingleDestination/>} />
           <Route path='/login' element={ <LogIn/>} />
-          <Route path='/makeReservation' element={ <MakeReservation/>} />
+          <Route path='/makeReservation/:id' element={ <MakeReservation/>} />
           <Route path='/profile' element={ <Profile/>} />
+          <Route path='/myReservations' element={ <MyReservations/>} />
           <Route path='/chat' element={ <ChatService/>} />
 
         </Routes>

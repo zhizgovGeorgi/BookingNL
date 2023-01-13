@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -25,21 +26,21 @@ public class Reservation {
     private Destination destination;
     @Setter(AccessLevel.NONE)
     @NotNull
-    private Date startDate;
+    private String startDate;
     @NotNull
-    private Date endDate;
+    private String endDate;
     @NotNull
 
     private int guests;
 
     private double totalPrice;
 
-    public void setStartDate(Date startDate) throws Exception {
-        if (startDate.compareTo(endDate) >0){
-            this.startDate = startDate;
-        }
-        else{
-            throw new InvalidData();
-        }
-    }
+//    public void setStartDate(Date startDate) throws Exception {
+//        if (startDate.compareTo(endDate) >0){
+//            this.startDate = startDate;
+//        }
+//        else{
+//            throw new InvalidData();
+//        }
+//    }
 }

@@ -52,27 +52,27 @@ export default function Register() {
         <Paper elevation={3} style={paperStyle}>
             <h1 style={{color:"blue"}}><u>Register</u></h1>
     <form className={classes.root} noValidate autoComplete="off">
-    <TextField id="outlined-basic" label="First Name" variant="outlined" fullWidth
+    <TextField name='fName' id="outlined-basic" label="First Name" variant="outlined" fullWidth
       value={firstName}
       onChange={(e)=>setFName(e.target.value)}
       />
-       <TextField id="outlined-basic" label="Last Name" variant="outlined" fullWidth
+       <TextField name='lName' id="outlined-basic" label="Last Name" variant="outlined" fullWidth
       value={lastName}
       onChange={(e)=>setLName(e.target.value)}
       />
-       <TextField id="outlined-basic" label="Address" variant="outlined" fullWidth
+       <TextField name='adress' id="outlined-basic" label="Address" variant="outlined" fullWidth
       value={adress}
       onChange={(e)=>setAddress(e.target.value)}
       />
-      <TextField id="outlined-basic" label="Email" variant="outlined" fullWidth
+      <TextField name='email' id="outlined-basic" label="Email" variant="outlined" fullWidth
       value={email}
       onChange={(e)=>setEmail(e.target.value)}
       />
-      <TextField type={"password"} id="outlined-basic" label="Password" variant="outlined" fullWidth
+      <TextField name='password' type={"password"} id="outlined-basic" label="Password" variant="outlined" fullWidth
       value={password}
       onChange={(e)=>setPassword(e.target.value)}
        />
-       <Button variant="contained" color="secondary" onClick={register}>
+       <Button id='registerButton' variant="contained" color="secondary" onClick={register}>
  Register
 </Button>
     </form>

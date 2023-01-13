@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -17,8 +18,8 @@ import java.util.Date;
 public class CreateReservationRequest {
     private User user;
     private Destination destination;
-    private Date startDate;
-    private Date endDate;
+    private String startDate;
+    private String endDate;
     private int guests;
     private double totalPrice;
 
