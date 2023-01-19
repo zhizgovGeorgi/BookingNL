@@ -36,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
       const paperStyle = {padding: '50px 20px', width:600, margin:"20px auto "}
     const [name, setName]=useState('');
     const [location, setLocation]=useState('');
+    const [imageURL, setImageURL]=useState('');
     const [pricePerNight, setPricePerNight]=useState('');
       const classes = useStyles();
       const email = jwtDecode(sessionStorage.getItem("accessToken")).sub;
@@ -45,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
       
     
    const saveDestination = async () =>{
-    const destination={email, name, location, pricePerNight}
+    const destination={email, name, location,imageURL, pricePerNight}
     DestinationService.saveDestination({destination}).then(res=>{
       navigate('/') 
     })
@@ -65,6 +66,10 @@ const useStyles = makeStyles((theme) => ({
          <TextField name='location'id="outlined-basic" label="Location" variant="outlined" fullWidth
         value={location}
         onChange={(e)=>setLocation(e.target.value)}
+        />
+        <TextField name='image-url'id="outlined-basic" label="Image URL" variant="outlined" fullWidth
+        value={imageURL}
+        onChange={(e)=>setImageURL(e.target.value)}
         />
          <TextField name='pricePerNight'id="outlined-basic" label="Price per night" variant="outlined" fullWidth
         value={pricePerNight}

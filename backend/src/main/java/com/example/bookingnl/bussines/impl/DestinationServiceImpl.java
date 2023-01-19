@@ -55,16 +55,12 @@ public class DestinationServiceImpl implements DestinationService {
     @Override
     public List<ResponseTopDestinations> getTopFiveDestinations(Date startDate, Date endDate, int limit) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        return visitRepository.findTopFiveDestinations(startDate, endDate, limit)
+        return visitRepository.findTopFiveDestinations( limit)
                 .stream()
                 .map(result -> {
-                    try {
                         return new ResponseTopDestinations(
-                                new Visit(Integer.parseInt(result[0].toString()), Long.parseLong(result[0].toString()),dateFormat.parse(result[0].toString() )),
+                                Long.parseLong(result[0].toString()),
                                 Integer.parseInt(result[1].toString()));
-                    } catch (ParseException e) {
-                        throw new RuntimeException(e);
-                    }
                 })
                 .collect(Collectors.toList());
 

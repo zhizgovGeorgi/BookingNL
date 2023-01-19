@@ -26,36 +26,63 @@ export default function MakeReservation(){
     const paperStyle = {padding: '50px 20px', width:600, margin:"20px auto "}
     const {id}= useParams();
     const[guests, setGuests]=useState('');
+    const[destination, setDestination]=useState('');
+    const[destinationPrice, setDestinationPrice]=useState('');
+    const[user, setUser]=useState('');
     const[startDate, setStartDate]=useState('');
     const[endDate, setEndDate]=useState('');
-    const[user, setUser]=useState('');
+
+    
 
     const classes = useStyles();
     const navigate = useNavigate();
     const email = jwtDecode(sessionStorage.getItem("accessToken")).sub;
 
-    //const user = UserService.getUser(jwtDecode(sessionStorage.getItem("accesstoken")).sub);
+    const getUser = () =>
+        UserService.getUser(email);
+
+    const getDestination = () =>
+        DestinationService.getDestination(id);
+
 
     const makeReservation = async () =>{
-      const totalPrice=guests;
-      const reservation={id,  startDate, endDate, guests, totalPrice}
+      const sDate = new Date(startDate);
+      const eDate = new Date(endDate);
+
+      // One day in milliseconds
+    const oneDay = 1000 * 60 * 60 * 24;
+
+    // Calculating the time difference between two dates
+    const diffInTime = sDate.getTime() - eDate.getTime();
+
+    // Calculating the no. of days between two dates
+    const diffInDays = Math.round(diffInTime / oneDay);
+      const totalPrice=diffInDays*(guests * destinationPrice);
+      const reservation={user, destination,  startDate, endDate, guests, totalPrice}
       ReservationService.makeReservation({reservation}).then(res=>{
         navigate("/")
       })}
 
+      
+      
 
       useEffect(()=>{
         //setUser(UserService.getUser(jwtDecode(sessionStorage.getItem("accesstoken")).sub));
-        UserService.getUser().then(res => {
-          console.log(res.data);
-          setUser(res.data)
-          
-        })
+        
+        
         const role = sessionStorage.getItem("role");
         if (role === "[Admin]") {
          navigate("/");
     
         }
+
+        getDestination().then(res => {
+          setDestination(res.data);
+          setDestinationPrice(res.data.pricePerNight)
+        })
+        getUser().then(res => {
+          setUser(res.data);
+        })
     },[])
     return (
       
@@ -63,7 +90,7 @@ export default function MakeReservation(){
             <Paper elevation={3} style={paperStyle}>
                 <h1 style={{color:"blue"}}><u>Make a reservation</u></h1>
         <form className={classes.root} noValidate autoComplete="off">
-        <TextField id="date"label="Start Date"type="date"defaultValue="2017-05-24"value={startDate}
+        <TextField  id="date"label="Start Date"type="date"defaultValue="2017-05-24"value={startDate}
     onChange={(e)=>setStartDate(e.target.value)}
     className={classes.textField}
     InputLabelProps={{
@@ -81,7 +108,7 @@ export default function MakeReservation(){
           value={guests}
           onChange={(e)=>setGuests(e.target.value)}
           />
-          
+          <p className="destination-location"> Total price for number of guests per Night: {destinationPrice}</p>
            <Button onClick={makeReservation} variant="contained" color="secondary" >
      Make reservation
     </Button>

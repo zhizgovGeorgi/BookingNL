@@ -33,9 +33,9 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .antMatchers("/login","/destinations/**","/api/register"
                        ).permitAll();
-        http.authorizeRequests().antMatchers(  "/api/**").hasAuthority("Admin");
-        http.authorizeRequests().antMatchers(   "/api/**", "/reservations/**").hasAuthority("Customer");
-            //    .anyRequest().authenticated();
+        http.authorizeRequests().antMatchers(  "destinations/create","/api/**").hasAuthority("Admin");
+        http.authorizeRequests().antMatchers(   "/api/**",  "/reservations/**").hasAuthority("Customer");
+//                .anyRequest().authenticated();
         http.addFilter(new CustomAuthenticationFilter(authenticationManager(authenticationConfiguration)));
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();

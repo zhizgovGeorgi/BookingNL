@@ -1,5 +1,6 @@
 package com.example.bookingnl.controller;
 
+import com.example.bookingnl.bussines.DestinationService;
 import com.example.bookingnl.bussines.ReservationService;
 import com.example.bookingnl.converter.ReservationConverter;
 import com.example.bookingnl.domain.*;
@@ -20,7 +21,7 @@ import java.util.List;
 public class ReservationsController {
     private ReservationService service;
 
-    @GetMapping()
+    @PostMapping ("/private")
     public ResponseEntity<List<Reservation>> getDestinations(@RequestParam Long userId) {
         return ResponseEntity.ok().body(service.findAllReservationsByUserId(userId));
     }

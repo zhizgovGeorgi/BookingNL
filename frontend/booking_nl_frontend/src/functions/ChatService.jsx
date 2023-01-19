@@ -18,8 +18,6 @@ export default function ChatService() {
     });
     useEffect(() => {
 
-        // let username = jwtDecode(sessionStorage.getItem("accessToken")).sub;
-        // handleUsername(username)
         connect();
 
     }, []);
@@ -33,7 +31,6 @@ export default function ChatService() {
     const onConnected = () => {
         setUserData({...userData,"connected": true});
         stompClient.subscribe('/chatroom/public', onMessageReceived);
-        stompClient.subscribe('/user/'+userData.username+'/private', onPrivateMessage);
         userJoin();
     }
 
@@ -50,10 +47,7 @@ export default function ChatService() {
         var payloadData = JSON.parse(payload.body);
         switch(payload.command){
             case "JOIN":
-                if(!privateChats.get(payloadData.senderName)){
-                    privateChats.set(payloadData.senderName,[]);
-                    setPrivateChats(new Map(privateChats));
-                }
+               
                 break;
             case "MESSAGE":
                 if(payloadData.message === null){
@@ -65,19 +59,7 @@ export default function ChatService() {
         }
     }
     
-    const onPrivateMessage = (payload)=>{
-        console.log(payload);
-        var payloadData = JSON.parse(payload.body);
-        if(privateChats.get(payloadData.senderName)){
-            privateChats.get(payloadData.senderName).push(payloadData);
-            setPrivateChats(new Map(privateChats));
-        }else{
-            let list =[];
-            list.push(payloadData);
-            privateChats.set(payloadData.senderName,list);
-            setPrivateChats(new Map(privateChats));
-        }
-    }
+    
 
 
     const onError = (err) => {
@@ -102,23 +84,7 @@ export default function ChatService() {
         }
     }
 
-    const sendPrivateValue=()=>{
-        if (stompClient) {
-            var chatMessage = {
-                senderName: userData.username,
-                receiverName:tab,
-                message: userData.message,
-                status:"MESSAGE"
-            };
-
-            if(userData.username !== tab){
-                privateChats.get(tab).push(chatMessage);
-                setPrivateChats(new Map(privateChats));
-            }
-            stompClient.send("/app/private-message", {}, JSON.stringify(chatMessage));
-            setUserData({...userData,"message": ""});
-        }
-    }
+   
 
     // const handleUsername=(username)=>{
     //     setUserData({...userData,"username": username });
@@ -152,7 +118,7 @@ export default function ChatService() {
                             <button type="button" className="send-button" onClick={sendValue}>send</button>
                         </div>
                     </div>}
-                    {tab!=="CHATROOM" && <div className="chat-content">
+                    {/* {tab!=="CHATROOM" && <div className="chat-content">
                         <ul className="chat-messages">
                             {[...privateChats.get(tab)].map((chat,index)=>(
                                 <li className={`message ${chat.senderName === userData.username && "self"}`} key={index}>
@@ -167,7 +133,7 @@ export default function ChatService() {
                             <input type="text" className="input-message" placeholder="enter the message" value={userData.message} onChange={handleMessage} />
                             <button type="button" className="send-button" onClick={sendPrivateValue}>send</button>
                         </div>
-                    </div>}
+                    </div>} */}
                 </div>
         </div>
     )

@@ -1,5 +1,6 @@
 package com.example.bookingnl.domain;
 
+import com.example.bookingnl.converter.DestinationConverter;
 import com.example.bookingnl.exceptions.InvalidData;
 import lombok.*;
 
@@ -24,9 +25,10 @@ public class Reservation {
     @ManyToOne()
     @JoinColumn(name = "destinationId", referencedColumnName = "id")
     private Destination destination;
-    @Setter(AccessLevel.NONE)
+
     @NotNull
     private String startDate;
+    @Setter(AccessLevel.NONE)
     @NotNull
     private String endDate;
     @NotNull
@@ -35,9 +37,12 @@ public class Reservation {
 
     private double totalPrice;
 
-//    public void setStartDate(Date startDate) throws Exception {
-//        if (startDate.compareTo(endDate) >0){
-//            this.startDate = startDate;
+
+//    public void setEndDate(String endDateDate) throws Exception {
+//        Date startD = DestinationConverter.stringToDate(startDate);
+//        Date endD = DestinationConverter.stringToDate(endDateDate);
+//        if (startD.compareTo(endD) <0){
+//            this.endDate = endDateDate;
 //        }
 //        else{
 //            throw new InvalidData();

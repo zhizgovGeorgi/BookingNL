@@ -12,17 +12,35 @@ import { Link } from 'react-router-dom';
 import {useNavigate} from 'react-router-dom';
 import SingleDestination from './SingleDestination';
 import ReservationService from '../functions/ReservationService';
+import UserService from '../functions/UserService';
+import jwtDecode from 'jwt-decode';
 
 
 
-export  function MyReservations  ()  {
+export default function MyReservations  ()  {
    const [reservations, setReservations] = useState([]);
-  
+   const email = jwtDecode(sessionStorage.getItem("accessToken")).sub;
+   const [userId, setId] = useState('');
+
+
+   const getUser = () =>
+   UserService.getUser(email);
+
+   const getReservations = () =>{
+   ReservationService.getReservations(userId).then(res => setReservations(res.data));;
+   }
+
    
 
    useEffect(()=>{
-    ReservationService.getReservations().then(res => setReservations(res.data));
+    getUser().then(res => {
+      setId(res.data.id)
+      // ReservationService.getReservations(userId).then(res => setReservations(res.data));
+    })
+    
    },[])
+
+  
 
    //const navigate = useNavigate();
 const useStyles = makeStyles((theme) => ({
@@ -48,49 +66,20 @@ const useStyles = makeStyles((theme) => ({
  return ( 
   
     <div  className="singleDestination">
-      <input
-  type="text"
-  placeholder="Search by destination name"
-  />
+    
+  <button onClick={getReservations}>Show</button>
   {reservations.map((reservation) => (
-    <div key={reservation.id}> 
-       <div >
-      <Paper>
-        <Grid container spacing={2}>
-          <Grid item>
-            <ButtonBase>
-              
-            </ButtonBase>
-          </Grid>
-          <Grid item xs={12} sm container>
-            <Grid item xs container direction="column" spacing={2}>
-              <Grid item xs>
-                <Typography gutterBottom variant="subtitle1">
-                 {reservation.startDate}
-                </Typography>
-                <Typography variant="body2" gutterBottom>
-                  {reservation.endDate}
-                </Typography>
-                <Typography variant="body2" color="textSecondary">
-                  {reservation.guests}
-                </Typography>
-              </Grid>
-              <Grid item>
-                {/* <Typography  variant="body2" style={{ cursor: 'pointer' }}>
-                  Remove
-                </Typography> */}
-                {/* <Button   color="white" > <Link to={`/singleDestination/${destination.id}`}>Show</Link></Button> */}
-              </Grid>
-            </Grid>
-            <Grid item>
-              {/* <Typography variant="subtitle1">{destination.price}</Typography> */}
-            </Grid>
-          </Grid>
-        </Grid>
-      </Paper>
-    </div>
-    </div>
+   <div className='card-container'>
+   
+ 
+        <div key={reservation.id} className = 'card'>
+    
+     <h2 className="card-name">Starts from {reservation.startDate} until {reservation.endDate}</h2>
+     <p className="card-location">Total amount to be paid {reservation.totalPrice} euro (for the whole reservation)</p>
+     <p className="card-price">Number of guest on reservation - {reservation.guests}</p>
+ </div>
 
+ </div>
     ))}
     </div>
  );

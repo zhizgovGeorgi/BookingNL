@@ -17,6 +17,7 @@ public class DestinationConverter {
         Destination destination = Destination.builder()
                 .name(request.getName())
                 .location(request.getLocation())
+                .imageURL(request.getImageURL())
                 .pricePerNight(request.getPricePerNight())
                 .build();
         return destination;

@@ -23,10 +23,10 @@ export default function SingleDestination() {
     let cDay = currentDate.getDate();
     let cMonth = currentDate.getMonth() + 1;
     let cYear = currentDate.getFullYear();
-    let dateOfVisit= (cDay + "/" + cMonth + "/" + cYear);
+    let dateOfVisit= (cDay + "-" + cMonth + "-" + cYear);
       
     const [visit, setVisit] = useState({
-      id: 0,
+      id:0,
       destinationId: id,
       dateOfVisit: dateOfVisit
   })
@@ -44,6 +44,7 @@ export default function SingleDestination() {
 
 
         const visitDestination = () =>{
+          console.log(visit)
         DestinationService.visitDestination(visit).then(res=>{
         })}
 
@@ -52,14 +53,15 @@ export default function SingleDestination() {
     
     if (role === "[Admin]" ) {
      setButtons(<>
-     <Button id="deleteButon" onClick={deleteDestination} color="white" > Delete destination</Button>
+     <button  id="deleteButon"  onClick={deleteDestination}  className="destination-button">Delete reservation</button>
+
      </>);
      
     }
     else if (role === "[Customer]" ) {
       setButtons(<>
-<Button  color="inherit" > <Link to={`/makeReservation/${id}`}>Make a reservation</Link></Button>      </>);
-      
+          <button  className="destination-button"><Link to={`/makeReservation/${id}`}>Make a reservation</Link></button>
+          </>);
      }
   },[])
 
@@ -76,13 +78,17 @@ export default function SingleDestination() {
   return (
     <div className="destinationInfo" >
       {destination &&
-        <div key={destination.id}>
-         Name: {destination.name}, 
-         Location: {destination.location},
-        Price per person per night: {destination.pricePerNight} euro
+        <div className="destination-card" key={destination.id}>
+          <div className="image-wrapper" key={destination.id}>
+          <img  src={destination.imageURL}/>
+          </div>
+         
+         <h2 className="destination-name">Name: {destination.name} </h2> 
+        <p className="destination-location"> Location: {destination.location}</p>
+        <p className="destination-price">{destination.pricePerNight}/night $ </p>
+        {buttons}
         </div>
       }
-    {buttons}
     </div>
   );
 

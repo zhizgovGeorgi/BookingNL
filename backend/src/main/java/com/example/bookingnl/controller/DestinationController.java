@@ -34,7 +34,7 @@ public class DestinationController {
         return ResponseEntity.ok().body(service.findAll());
     }
 
-    @PostMapping()
+    @PostMapping("/create")
     public ResponseEntity<DestinationResponse> saveDestination(@RequestBody CreateDestinationRequest request) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/destinations").toUriString());
         Destination destination = DestinationConverter.requestToEntity(request);
@@ -44,7 +44,7 @@ public class DestinationController {
 
     @PostMapping("/visit")
     public ResponseEntity<Visit> saveVisit(@RequestBody VisitRequest visit) throws ParseException {
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/destinations").toUriString());
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/destinations/visit").toUriString());
         Visit actual = DestinationConverter.requestToEntity(visit);
 
 

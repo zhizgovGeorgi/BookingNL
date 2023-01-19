@@ -17,7 +17,7 @@ const getAllDestinations = async () => {
 const saveDestination = (destination) => {
     
     console.log(destination)
-     return axios.post(`${destinationsURL}`, destination.destination,{
+     return axios.post(`${destinationsURL}/create`, destination.destination,{
         headers:{
             'Authorization': "Bearer " + jwtToken
         }

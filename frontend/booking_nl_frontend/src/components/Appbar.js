@@ -21,8 +21,8 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   title: {
-    flexGrow: 1,
-  },
+    flexGrow: 1
+  }
 }));
 
 
@@ -35,26 +35,21 @@ const [buttons, setButtons] = useState(null);
 
   useEffect(()=>{
     const role = sessionStorage.getItem("role");
-  //  const decodedToken = jwtDecode(sessionStorage.getItem("accessToken")).sub;
-
 
     if (role === "[Admin]" ) {
      setButtons(<>
-     <Button name='createDest' id='createDest' color="white" > <Link to={'/createDestinations'}>Create Destinations</Link></Button>
+     <Button name='createDest' id='createDest'  color="white" > <Link to={'/createDestinations'}>Create Destinations</Link></Button>
      <Button  color="inherit" > <Link to={'/chat'}>Chat</Link></Button>
      <Button onClick={UserService.logout} color="inherit" > <Link to={'/'}>Log Out</Link></Button>
-     <IconButton edge="start"  className={classes.menuButton} color="inherit" aria-label="menu">
-          <Link to={'/profile'}>
-            <AccountCircleIcon  />
-            </Link>
-          </IconButton>
+    
      </>);
      
     }
     else if (role === "[Customer]" ) {
       setButtons(<>
        
-       <Button  color="inherit" > <Link to={'/chat'}>Chat</Link></Button>
+       <Button   color="inherit" > <Link to={'/chat'}>Chat</Link></Button>
+       <Button  color="inherit" > <Link to={'/myReservations'}>My Reservations</Link></Button>
       <Button onClick={UserService.logout} color="inherit" > <Link to={'/'}>Log Out</Link></Button>
       <IconButton id='profiles' edge="start"  className={classes.menuButton} color="inherit" aria-label="menu">
           <Link to={'/profile'}>

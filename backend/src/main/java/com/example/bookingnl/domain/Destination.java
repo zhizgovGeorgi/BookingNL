@@ -24,6 +24,9 @@ public class Destination {
     private String name;
     @NotBlank
     private String location;
+
+    @NotBlank
+    private String imageURL;
     @NotNull
     @Setter(AccessLevel.NONE)
     private double pricePerNight;

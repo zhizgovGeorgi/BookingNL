@@ -3,10 +3,12 @@ import { toast } from "react-toastify";
 
 
 const reservationURL = 'http://localhost:8080/reservations';
-const jwtToken = window.sessionStorage.getItem('accessToken');
+const jwtToken = sessionStorage.getItem('accessToken');
 
 const makeReservation=(reservation)=>{
     return axios.post(`${reservationURL}`, reservation.reservation,{
+        
+        
         headers:{
             'Authorization': "Bearer " + jwtToken
         }
@@ -19,26 +21,33 @@ const makeReservation=(reservation)=>{
   
           toast.error(err.response.message);
   
-        }else{
+        }else if (err.response.status === 500) {
+  
+            toast.error(err.response.message);
+    
+          }
+        else{
 
-            throw new Error();
+            toast.error(err.response.message);
     
           }
     })
      ;
 }
 
-const getReservations=(userId)=>{
-    try {
-        return  axios.get(`${reservationURL}`, userId.userId,{
-            headers:{
-                'Authorization': "Bearer " + jwtToken
-            }
-         });
-  } catch (error) {
-      console.log('Error with idk', error);
+
+const getReservations = (userId) =>{
+    return axios.post(`${reservationURL}/private`, userId, {
+        params:{
+            'userId': userId
+                },
+      headers:{
+          'Authorization':"Bearer " + jwtToken
+      }
+  });
+  
   }
-}
+  
 export default  {
     makeReservation,
     getReservations

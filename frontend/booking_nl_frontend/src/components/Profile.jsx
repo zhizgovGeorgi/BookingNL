@@ -23,6 +23,8 @@ export default function Profile() {
 
       const getUser = () =>
         UserService.getUser(email);
+
+        
       
         
   useEffect(()=>{
@@ -46,6 +48,7 @@ setLName(res.data.lastName)
  
 
   return (
+    
     <div className="userInfo" >
       {user &&
         <div key={user.id}>

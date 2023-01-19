@@ -55,7 +55,7 @@ const getUser = (email) =>{
 }
 
 const updateUserDetails = (userRequest) =>{
-  return axios.put(`${userURL}`, userRequest.userRequest, {
+  return axios.put(`${userURL}`, userRequest, {
     headers:{
         'Authorization':"Bearer " + jwtToken
     }

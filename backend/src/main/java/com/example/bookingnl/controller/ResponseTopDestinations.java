@@ -9,6 +9,6 @@ import lombok.Data;
 @Builder
 @AllArgsConstructor
 public class ResponseTopDestinations {
-    private Visit visit;
+    private Long visit;
     private Integer count;
 }

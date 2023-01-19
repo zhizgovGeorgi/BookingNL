@@ -1,5 +1,6 @@
 package com.example.bookingnl.persistence;
 
+import com.example.bookingnl.controller.ResponseTopDestinations;
 import com.example.bookingnl.domain.Visit;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -13,10 +14,10 @@ import java.util.List;
 public interface VisitRepository extends JpaRepository<Visit, Long> {
 
     @Query(value =
-            "select visit.id, COUNT(*) FROM visit " +
-                    "WHERE (visit.date_of_visit BETWEEN :startDate AND :endDate) " +
+            "select visit.destination_id, COUNT(*) FROM visit " +
+
                     "GROUP BY destination_id  " +
                     "ORDER BY COUNT(*) " +
                     "DESC LIMIT :limit", nativeQuery = true)
-    List<Object[]> findTopFiveDestinations(@Param("startDate") Date startDate, @Param("endDate") Date endDate, @Param("limit") int limit);
+    List<Object[]> findTopFiveDestinations( @Param("limit") int limit);
 }

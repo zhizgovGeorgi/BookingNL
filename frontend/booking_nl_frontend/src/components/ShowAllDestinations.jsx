@@ -52,54 +52,35 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: '100%',
     maxHeight: '100%',
   },
+  test:{
+    fontSize: "80px"
+  }
+
 }));   
  return ( 
   
-    <div  className="singleDestination">
-      <input
-  type="text"
-  placeholder="Search by destination name"
-  onChange={handleSearch}/>
+   <div  className="singleDestination">
+     <input className='searchbar'
+ type="text"
+ placeholder="Search by destination name"
+ onChange={handleSearch}/> 
+ <div className='card-container'>
+
+ 
   {searchDestination.map((destination) => (
-    <div key={destination.id}> 
-       <div >
-      <Paper>
-        <Grid container spacing={2}>
-          <Grid item>
-            <ButtonBase>
-              
-            </ButtonBase>
-          </Grid>
-          <Grid item xs={12} sm container>
-            <Grid item xs container direction="column" spacing={2}>
-              <Grid item xs>
-                <Typography gutterBottom variant="subtitle1">
-                 {destination.name}
-                </Typography>
-                <Typography variant="body2" gutterBottom>
-                  {destination.location}
-                </Typography>
-                <Typography variant="body2" color="textSecondary">
-                  {destination.id}
-                </Typography>
-              </Grid>
-              <Grid item>
-                {/* <Typography  variant="body2" style={{ cursor: 'pointer' }}>
-                  Remove
-                </Typography> */}
-                <Button   color="white" > <Link to={`/singleDestination/${destination.id}`}>Show</Link></Button>
-              </Grid>
-            </Grid>
-            <Grid item>
-              <Typography variant="subtitle1">{destination.price}</Typography>
-            </Grid>
-          </Grid>
-        </Grid>
-      </Paper>
-    </div>
-    </div>
+  
+
+       <div key={destination.id} className = 'card'>
+   
+    <h2 className="card-name">{destination.name}</h2>
+    <p className="card-location">{destination.location}</p>
+    <p className="card-price">{destination.pricePerNight}/ night $</p>
+    <button  className="card-button"><Link to={`/singleDestination/${destination.id}`}>Show</Link></button>
+</div>
+    
 
     ))}
+    </div>
     </div>
  );
 
