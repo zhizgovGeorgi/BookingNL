@@ -21,6 +21,7 @@ export default function MyReservations  ()  {
    const [reservations, setReservations] = useState([]);
    const email = jwtDecode(sessionStorage.getItem("accessToken")).sub;
    const [userId, setId] = useState('');
+   const navigate = useNavigate();
 
 
    const getUser = () =>
@@ -33,6 +34,12 @@ export default function MyReservations  ()  {
    
 
    useEffect(()=>{
+    const role = sessionStorage.getItem("role");
+        if (role === "[Admin]") {
+         navigate("/");
+    
+        }
+
     getUser().then(res => {
       setId(res.data.id)
       // ReservationService.getReservations(userId).then(res => setReservations(res.data));
@@ -67,7 +74,7 @@ const useStyles = makeStyles((theme) => ({
   
     <div  className="singleDestination">
     
-  <button onClick={getReservations}>Show</button>
+  <button className="show-reservation-button" onClick={getReservations}>Show</button>
   {reservations.map((reservation) => (
    <div className='card-container'>
    

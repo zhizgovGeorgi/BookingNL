@@ -237,3 +237,12 @@ margin: 0;
 .navButton{
   margin-right: 3rem;
 }
+.show-reservation-button{
+  background: rgb(255, 2, 2);
+  color: white;
+  width: 15%;
+  border-radius: 15px;
+  margin-top: 16px;
+  font-weight: normal;
+  text-decoration: none
+}

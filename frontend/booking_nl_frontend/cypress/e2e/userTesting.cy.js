@@ -37,7 +37,7 @@ describe("log in as admin", () => {
             cy.get('input[name=fName]').type('Mimi')
             cy.get('input[name=lName]').type('Mem')
             cy.get('input[name=adress]').type('street')
-            cy.get('input[name=email]').type('mimkata@abv.bg')
+            cy.get('input[name=email]').type('muki@abv.bg')
       cy.get('input[name=password]').type('1234')
       cy.get('#registerButton').click();
       cy.url().should('include', 'http://localhost:3000/login');

@@ -31,10 +31,10 @@ public class SecurityConfig {
         http.sessionManagement().sessionCreationPolicy(STATELESS);
         http
                 .authorizeRequests()
-                .antMatchers("/login","/destinations/**","/api/register"
+                .antMatchers("/login","/destinations/**","/api/register",  "/reservations/**"
                        ).permitAll();
         http.authorizeRequests().antMatchers(  "destinations/create","/api/**").hasAuthority("Admin");
-        http.authorizeRequests().antMatchers(   "/api/**",  "/reservations/**").hasAuthority("Customer");
+        http.authorizeRequests().antMatchers(   "/api/**").hasAuthority("Customer");
 //                .anyRequest().authenticated();
         http.addFilter(new CustomAuthenticationFilter(authenticationManager(authenticationConfiguration)));
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);

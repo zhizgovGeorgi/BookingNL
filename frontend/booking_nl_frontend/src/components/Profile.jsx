@@ -6,6 +6,7 @@ import UserService from "../functions/UserService";
 import TextField from '@material-ui/core/TextField';
 import { Container, Paper, Button } from '@material-ui/core';
 import DestinationService from "../functions/DestinationService";
+import { toast } from "react-toastify";
 
 export default function Profile() {
     const navigate = useNavigate();
@@ -19,6 +20,7 @@ export default function Profile() {
     const updateUserDetails=()=>{
       const userRequest={email, firstName, lastName, adress}
     UserService.updateUserDetails({userRequest})
+    toast.success("Successfull update!")
     }
 
       const getUser = () =>

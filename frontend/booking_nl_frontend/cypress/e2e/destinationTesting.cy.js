@@ -12,7 +12,7 @@ describe('log in and create destination as admin', () => {
       cy.url().should('include', 'http://localhost:3000')
       cy.get('#createDest').click()   ;
       cy.get('#root > div > div.MuiContainer-root.MuiContainer-maxWidthLg > div > form > div:nth-child(1) > div').type('Aurora')
-      cy.get('#root > div > div.MuiContainer-root.MuiContainer-maxWidthLg > div > form > div:nth-child(2)').type('Dgrad')
+      cy.get('#root > div > div.MuiContainer-root.MuiContainer-maxWidthLg > div > form > div:nth-child(2)').type('Melbourne')
       cy.get('#root > div > div.MuiContainer-root.MuiContainer-maxWidthLg > div > form > div:nth-child(3)').type('89.99')
       cy.get('#root > div > div.MuiContainer-root.MuiContainer-maxWidthLg > div > form > button').click()
     })

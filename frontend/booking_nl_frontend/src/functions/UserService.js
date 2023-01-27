@@ -55,12 +55,11 @@ const getUser = (email) =>{
 }
 
 const updateUserDetails = (userRequest) =>{
-  return axios.put(`${userURL}`, userRequest, {
+  return axios.put(`${userURL}`, userRequest.userRequest, {
     headers:{
         'Authorization':"Bearer " + jwtToken
     }
 }).then(response => {
-  console.log('kur', response.data);
   toast.success("Succesful update of your profile details!")
 
 })

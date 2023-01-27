@@ -28,7 +28,6 @@ public class Reservation {
 
     @NotNull
     private String startDate;
-    @Setter(AccessLevel.NONE)
     @NotNull
     private String endDate;
     @NotNull

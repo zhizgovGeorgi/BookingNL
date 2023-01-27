@@ -36,6 +36,7 @@ public class DestinationController {
 
     @PostMapping("/create")
     public ResponseEntity<DestinationResponse> saveDestination(@RequestBody CreateDestinationRequest request) {
+
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/destinations").toUriString());
         Destination destination = DestinationConverter.requestToEntity(request);
         DestinationResponse response = DestinationConverter.entityToResponse(service.saveDestination(destination));

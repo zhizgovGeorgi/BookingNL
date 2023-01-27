@@ -74,7 +74,7 @@ const useStyles = makeStyles((theme) => ({
    
     <h2 className="card-name">{destination.name}</h2>
     <p className="card-location">{destination.location}</p>
-    <p className="card-price">{destination.pricePerNight}/ night $</p>
+    <p className="card-price">${destination.pricePerNight}/ night </p>
     <button  className="card-button"><Link to={`/singleDestination/${destination.id}`}>Show</Link></button>
 </div>
     
